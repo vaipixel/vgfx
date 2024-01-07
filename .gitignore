@@ -35,8 +35,9 @@ cmake-build-*/
 
 *.iml
 .gradle
+!.idea
+**/.idea/*
 /.idea
-/local.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -49,3 +50,7 @@ cmake-build-*/
 .externalNativeBuild
 .cxx
 local.properties
+
+/third_party
+/vendor_tools
+/out

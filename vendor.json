@@ -1,0 +1,23 @@
+{
+  "source": "third_party",
+  "out": "third_party/out",
+  "vendors": [
+    {
+      "name": "swappy",
+      "cmake": {
+        "targets": [
+          "swappy"
+        ],
+        "arguments": [
+          "-DCMAKE_CXX_FLAGS=\"-w\""
+        ],
+        "includes": [
+          "${SOURCE_DIR}/include/"
+        ],
+        "platforms": [
+          "android"
+        ]
+      }
+    }
+  ]
+}
