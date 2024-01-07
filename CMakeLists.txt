@@ -16,6 +16,8 @@ message("VGFX_USE_GAMES_FRAME_PACING: ${VGFX_USE_GAMES_FRAME_PACING}")
 file(GLOB_RECURSE SRC_FILES
         src/core/*.*
         src/platform/default/*.*
+        src/gpu/*.*
+        src/opengl/*.*
         src/*.*)
 
 if (VGFX_USE_GAMES_FRAME_PACING)
@@ -24,7 +26,7 @@ endif ()
 
 list(APPEND VGFX_FILES ${SRC_FILES})
 
-if (VGFX_USE_GAMES_FRAME_PACING)
+if (VGFX_USE_GAMES_FRAME_PACING AND ANDROID)
     list(APPEND VGFX_INCLUDES vendor/swappy/include)
     file(GLOB SWAPPY_LIBS vendor/swappy/${LIBRARY_ENTRY}/*${CMAKE_SHARED_LIBRARY_SUFFIX})
     list(APPEND VGFX_SHARED_LIBS ${SWAPPY_LIBS})

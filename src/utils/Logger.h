@@ -8,4 +8,10 @@ namespace vgfx {
 
     void logd(const std::string &message);
 
+#if DEBUG
+#define DEBUG_ASSERT(assertion) ASSERT(assertion)
+#else
+#define DEBUG_ASSERT(assertion)
+#endif
+
 }
