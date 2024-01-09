@@ -10,6 +10,6 @@ namespace vgfx {
     static std::unordered_map<int, std::unique_ptr<const GLInterface>> glInterfaceMap = {};
 
     static int GetGLVersion() {
-
+        return 0;
     }
 } // vgfx

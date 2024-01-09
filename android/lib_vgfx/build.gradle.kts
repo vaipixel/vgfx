@@ -14,6 +14,7 @@ android {
         consumerProguardFiles("consumer-rules.pro")
         externalNativeBuild {
             cmake {
+                arguments("-DANDROID_STL=c++_shared")
                 cppFlags("-std=c++17")
             }
         }
@@ -40,6 +41,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    packagingOptions {
+        pickFirst("lib/x86/libc++_shared.so")
+        pickFirst("lib/x86_64/libc++_shared.so")
+        pickFirst("lib/armeabi-v7a/libc++_shared.so")
+        pickFirst("lib/arm64-v8a/libc++_shared.so")
     }
 }
 
