@@ -11,6 +11,9 @@ cmake_minimum_required(VERSION 3.22.1)
 # build script scope).
 project("vgfx_jni")
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../ ./vgfx)
 
 message("${CMAKE_CURRENT_SOURCE_DIR}/../../ ./vgfx")
@@ -28,9 +31,11 @@ message("${CMAKE_CURRENT_SOURCE_DIR}/../../ ./vgfx")
 # System.loadLibrary() and pass the name of the library defined here;
 # for GameActivity/NativeActivity derived applications, the same library name must be
 # used in the AndroidManifest.xml file.
+file(GLOB_RECURSE VGFX_JNI_SRC src/main/cpp/*.*)
+
 add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
-        src/main/cpp/vgfx.cpp)
+        ${VGFX_JNI_SRC})
 
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this

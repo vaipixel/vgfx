@@ -4,8 +4,12 @@
 
 #pragma once
 
-class Window {
+namespace vgfx {
+    class Window {
 
-};
+    };
+}
+
+
 
 

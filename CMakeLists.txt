@@ -54,7 +54,7 @@ find_vendor_libraries(vgfx-vendor STATIC VGFX_VENDOR_STATIC_LIBRARIES SHARED TGF
 list(APPEND VGFX_STATIC_LIBS ${VGFX_VENDOR_STATIC_LIBRARIES})
 list(APPEND VGFX_SHARED_LIBS ${TGFX_VENDOR_SHARED_LIBRARIES})
 
-add_library(vgfx SHARED ${VGFX_FILES})
+add_library(vgfx STATIC ${VGFX_FILES})
 add_dependencies(vgfx vgfx-vendor)
 
 target_include_directories(vgfx PUBLIC include PRIVATE src)
