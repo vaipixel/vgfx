@@ -4,9 +4,11 @@
 
 #pragma once
 
+#include "vgfx/opengl/GLDevice.h"
+
 namespace vgfx {
 
-    class EGLDevice {
+    class EGLDevice : GLDevice {
 
     };
 

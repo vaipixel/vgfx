@@ -1,4 +1,4 @@
-package com.vaipixel.vgfx
+package org.vaipixel.vgfx
 
 import android.graphics.SurfaceTexture
 import android.view.Surface
@@ -56,6 +56,8 @@ class VGFXView : TextureView, TextureView.SurfaceTextureListener {
     private external fun updateSize()
 
     private external fun nativeRelease()
+
+    private external fun nativeDraw()
 
     companion object {
         private external fun nativeInit()

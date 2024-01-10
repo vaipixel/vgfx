@@ -1,4 +1,4 @@
-package com.vaipixel.vgfx.demo
+package org.vaipixel.vgfx
 
 import org.junit.Test
 

@@ -8,6 +8,9 @@
 
 namespace vgfx {
 
+    /**
+     * The OpenGL interface for drawing graphics.
+     */
     class GLDevice : public Device {
     public:
         /**

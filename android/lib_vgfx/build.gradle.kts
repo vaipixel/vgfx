@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vaipixel.vgfx"
+    namespace = "org.vaipixel.vgfx"
     compileSdk = 34
 
     defaultConfig {
