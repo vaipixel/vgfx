@@ -3,7 +3,9 @@
 //
 
 #include "vgfx/core/Canvas.h"
+#include "CanvasState.h"
 #include "utils/Logger.h"
+#include "gpu/SurfaceDrawContext.h"
 #include <atomic>
 
 namespace vgfx {

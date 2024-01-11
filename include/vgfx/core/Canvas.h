@@ -2,22 +2,25 @@
 // Created by Anatta Feng on 2024/1/7.
 //
 
-#ifndef VGFX_CANVAS_H
-#define VGFX_CANVAS_H
+#pragma once
 
+#include <vector>
 #include "vgfx/gpu/Surface.h"
-#include "Matrix.h"
-#include "BlendMode.h"
-#include "Rect.h"
-#include "Paint.h"
-#include "core/CanvasState.h"
-#include "gpu/SurfaceDrawContext.h"
+#include "vgfx/core/Matrix.h"
+#include "vgfx/core/BlendMode.h"
+#include "vgfx/core/Rect.h"
+#include "vgfx/core/Paint.h"
 
 namespace vgfx {
     class Surface;
 
     class SurfaceOptions;
+
     class Context;
+
+    struct CanvasState;
+
+    class SurfaceDrawContext;
 
     /**
      * Canvas provides an interface for drawing, and how the drawing is clipped and transformed. Canvas
@@ -130,4 +133,3 @@ namespace vgfx {
     };
 
 }
-#endif //VGFX_CANVAS_H

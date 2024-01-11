@@ -7,6 +7,7 @@
 #include "vgfx/gpu/Surface.h"
 
 namespace vgfx {
+    class Surface;
 
     class SurfaceDrawContext {
     public:

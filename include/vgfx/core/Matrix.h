@@ -49,7 +49,8 @@ namespace vgfx {
         }
 
         bool isIdentity() const {
-            return values;
+            return values[0] == 1 && values[1] == 0 && values[2] == 0 && values[3] == 0 && values[4] == 1 &&
+                   values[5] == 0;
         }
 
         /**
@@ -68,7 +69,8 @@ namespace vgfx {
          *
          *   @return  const identity Matrix
          */
-        static const Matrix& I();
+        static const Matrix &I();
+
     private:
         float values[6];
 
