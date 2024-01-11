@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <cstring>
+
 namespace vgfx {
 
     /**

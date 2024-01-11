@@ -6,15 +6,13 @@
 #include "utils/Logger.h"
 
 namespace vgfx {
-    Canvas::Canvas() {
-        vgfx::logd("Create Canvas");
+    Canvas::Canvas(vgfx::Surface *surface) {
+
     }
 
     Canvas::~Canvas() {
         vgfx::logd("Destroy Canvas");
     }
 
-    void Canvas::draw() {
-        vgfx::logd("draw");
-    }
+
 }

@@ -9,12 +9,13 @@
 #include "Matrix.h"
 #include "BlendMode.h"
 #include "Rect.h"
-#include "core/Paint.h"
+#include "Paint.h"
 
 namespace vgfx {
     class Surface;
 
     class SurfaceOptions;
+    class Context;
 
     /**
      * Canvas provides an interface for drawing, and how the drawing is clipped and transformed. Canvas
@@ -110,7 +111,20 @@ namespace vgfx {
          */
         void setBlendMode(BlendMode blendMode);
 
+        /**
+         * Draws a rectangle with specified paint, using current alpha, blend mode, clip and matrix.
+         * @param rect
+         * @param paint
+         */
         void drawRect(const Rect &rect, const Paint &paint);
+
+    private:
+        Surface *surface = nullptr;
+        std::shared_ptr<Surface> _clipSurface = nullptr;
+        uint32_t clipID = 0;
+        std::shared_ptr<CanvasState> state = nullptr;
+        SurfaceDrawContext* drawContext = nullptr;
+
     };
 
 }
