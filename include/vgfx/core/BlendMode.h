@@ -16,6 +16,10 @@ namespace vgfx {
         Clear,
         Src,
         Dst,
+        /**
+         * Source over destination.
+         */
+        SrcOver,
 
     };
 }

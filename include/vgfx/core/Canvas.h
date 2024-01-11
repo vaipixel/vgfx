@@ -10,6 +10,8 @@
 #include "BlendMode.h"
 #include "Rect.h"
 #include "Paint.h"
+#include "core/CanvasState.h"
+#include "gpu/SurfaceDrawContext.h"
 
 namespace vgfx {
     class Surface;
@@ -123,8 +125,8 @@ namespace vgfx {
         std::shared_ptr<Surface> _clipSurface = nullptr;
         uint32_t clipID = 0;
         std::shared_ptr<CanvasState> state = nullptr;
-        SurfaceDrawContext* drawContext = nullptr;
-
+        SurfaceDrawContext *drawContext = nullptr;
+        std::vector<std::shared_ptr<CanvasState>> savedStateList = {};
     };
 
 }

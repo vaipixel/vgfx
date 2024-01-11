@@ -59,6 +59,16 @@ namespace vgfx {
          */
         void setScale(float tx, float ty);
 
+        /**
+         * Returns reference to const identity Matrix. Returned Matrix is set to:
+         *
+         *       | 1 0 0 |
+         *       | 0 1 0 |
+         *       | 0 0 1 |
+         *
+         *   @return  const identity Matrix
+         */
+        static const Matrix& I();
     private:
         float values[6];
 

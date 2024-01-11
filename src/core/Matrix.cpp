@@ -5,4 +5,9 @@
 #include "vgfx/core/Matrix.h"
 
 namespace vgfx {
+    const Matrix &Matrix::I() {
+        // TODO
+        static const Matrix identity = {};
+        return identity;
+    }
 } // vgfx
