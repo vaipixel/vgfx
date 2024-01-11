@@ -50,7 +50,13 @@ namespace vgfx {
             return values;
         }
 
+        /**
+         * Sets Matrix to translate by (tx, ty).
+         * @param tx  horizontal translation.
+         * @param ty  vertical translation.
+         */
         void setScale(float tx, float ty);
+
     private:
         float values[6];
 

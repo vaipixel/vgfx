@@ -6,8 +6,16 @@
 #define VGFX_CANVAS_H
 
 #include "vgfx/gpu/Surface.h"
+#include "Matrix.h"
+#include "BlendMode.h"
+#include "Rect.h"
+#include "core/Paint.h"
 
 namespace vgfx {
+    class Surface;
+
+    class SurfaceOptions;
+
     /**
      * Canvas provides an interface for drawing, and how the drawing is clipped and transformed. Canvas
      * contains a stack of opacity, blend mode, matrix and clip values. Each Canvas draw call transforms
@@ -52,9 +60,57 @@ namespace vgfx {
          */
         void restore();
 
+        /**
+         * Returns the current total matrix.
+         * @return
+         */
         Matrix getMatrix() const;
 
-        void draw();
+        /**
+         * Replaces transformation with specified matrix. Unlike concat(), any prior matrix state is
+         * overwritten.
+         * @param matrix  matrix to copy, replacing existing Matrix.
+         */
+        void setMatrix(const Matrix &matrix);
+
+        /**
+         * Sets Matrix to the identity matrix. Any prior matrix state is overwritten.
+         */
+        void resetMatrix();
+
+        /**
+         * Replaces the current Matrix with matrix premultiplied with the existing one. This has the
+         * effect of transforming the drawn geometry by matrix, before transforming the result with the
+         * existing Matrix.
+         * @param matrix
+         */
+        void concat(const Matrix &matrix);
+
+        /**
+         * Returns the current global alpha.
+         * @return
+         */
+        float getAlpha() const;
+
+        /**
+         * Replaces the global alpha with specified newAlpha.
+         * @param newAlpha
+         */
+        void setAlpha(float newAlpha);
+
+        /**
+         * Returns the current global blend mode.
+         * @return
+         */
+        BlendMode getBlendMode() const;
+
+        /**
+         * Replaces the global blend mode with specified new blend mode.
+         * @param blendMode
+         */
+        void setBlendMode(BlendMode blendMode);
+
+        void drawRect(const Rect &rect, const Paint &paint);
     };
 
 }
