@@ -6,6 +6,5 @@
 
 namespace vgfx {
     std::shared_ptr<EGLWindow> EGLWindow::MakeFrom(EGLNativeWindowType nativeWindow, EGLContext sharedContext) {
-        
     }
 } // vgfx
