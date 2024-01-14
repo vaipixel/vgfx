@@ -57,6 +57,10 @@
 
 用于所有代理派生对象的基类。它实现了资源的延迟加载，只在实际需要的时候才进行加载。
 
+### RenderTargetProxy
+
+提供 RenderTarget 的延迟加载
+
 ### Backend
 
 抽象了 VGFX 会使用的后端 API
@@ -72,3 +76,12 @@
 #### BackendSemaphore
 
 用于传入和从 VGFX 接收有关后端信号量对象数据的包装类。
+
+## Resource
+
+GPU 资源的基类。因为调用的线程上可能没有 GPU 的 Context，所以不应该在析构过程中调用任何 API。另外：Recource 并不是线程安全的，在关联的设备 lock 之前，不要访问 Resource 的任何属性。
+
+### RenderTarget
+
+代表一个可以进行渲染的 2D 缓冲区。
+
