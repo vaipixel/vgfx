@@ -10,6 +10,8 @@
 #include "gpu/proxies/TextureProxy.h"
 #include "gpu/Backend.h"
 #include "vgfx/platform/HardwareBuffer.h"
+#include "vgfx/core/Color.h"
+#include "vgfx/core/ImageInfo.h"
 
 namespace vgfx {
     class Canvas;
@@ -186,6 +188,61 @@ namespace vgfx {
          * @return
          */
         bool wait(const BackendSemaphore &waitSemaphore);
+
+        /**
+         * Apply all pending changes to the render target immediately. After issuing all commands, the
+         * semaphore will be signaled by the GPU. If the signalSemaphore is not null and uninitialized,
+         * a new semaphore is created and initializes BackendSemaphore. The caller must delete the
+         * semaphore returned in signalSemaphore. BackendSemaphore can be deleted as soon as this function
+         * returns. If the back-end API is OpenGL only uninitialized backend semaphores are supported.
+         * If false is returned, the GPU back-end did not create or add a semaphore to signal on the GPU;
+         * the caller should bot instruct the GPU to wait on the semaphore.
+         * @param signalSemaphore
+         * @return
+         */
+        bool flush(BackendSemaphore *signalSemaphore = nullptr);
+
+        /**
+         * Call to ensure all reads/writes of the surface have been issued to the underlying 3D API.
+         * VGFX will correctly order its own draws and pixel operations. This must be used to ensure
+         * correct ordering when the surface backing store is accessed outside VGFX (e.g. direct use of
+         * the 3D API or a windowing system). Context has additional flush and submit methods that apply
+         * to all surfaces and images created from a Context. This is equivalent to calling
+         * Surface::flush() followed bu Context::submit(syncCpu).
+         * @param syncCpu
+         */
+        void flushAndSubmit(bool syncCpu = false);
+
+        /**
+         * Returns an Image capturing the Surface contents. Subsequent drawings to the Surface contents
+         * are not captured. This method would trigger immediate texture copying if the Surface has no
+         * backing texture or the backing texture was allocated externally. For example, the Surface was
+         * created from a backendRenderTarget, a BackendTexture or a HardwareBuffer.
+         * @return
+         */
+        std::shared_ptr<Image> makeImageSnapshot();
+
+        /**
+         * Returns pixel at (x, y) as unpremultiplied color. Some color precision may be last in the
+         * conversion to unpremultiplied color; original pixel data may have additional precision.
+         * Returns a transparent color if the point (x, y) is not contained by the Surface bounds.
+         * @param x  column index, zero or greater, and less than width()/
+         * @param y  row index, zero or greater, and less than height().
+         * @return   pixel converted to unpremultiplied color.
+         */
+        Color getColor(int x, int y);
+
+        /**
+         * Copies a rect of pixels to dstPixels with specified ImageInfo. Copy starts at (srcX, srcY), and
+         * does not exceed Surface (width(), height()). Pixels are copies only if pixel conversion is
+         * possible. Returns true if pixels are copied to dstPixels.
+         * @param dstInfo
+         * @param dstPixels
+         * @param srcX
+         * @param srcY
+         * @return
+         */
+        bool readPixels(const ImageInfo &dstInfo, void *dstPixels, int srcX = 0, int srcY = 0);
 
     private:
         std::shared_ptr<RenderTargetProxy> renderTargetProxy = nullptr;
