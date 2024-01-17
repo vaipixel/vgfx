@@ -30,6 +30,12 @@ namespace vgfx {
          * Alpha component.
          */
         float alpha;
+
+        /**
+         * Returns a fully transparent Color.
+         * @return
+         */
+        static const Color &Transparent();
     };
 
 } // vgfx

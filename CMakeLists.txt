@@ -18,6 +18,7 @@ file(GLOB_RECURSE SRC_FILES
         src/platform/default/*.*
         src/gpu/*.*
         src/opengl/*.*
+        src/utils/*.*
         src/*.*)
 
 if (VGFX_USE_GAMES_FRAME_PACING)

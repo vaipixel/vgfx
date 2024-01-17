@@ -15,11 +15,8 @@
 
 namespace vgfx {
     class Canvas;
-
     class Context;
-
     class RenderTarget;
-
     class RenderTargetProxy;
 
     /**

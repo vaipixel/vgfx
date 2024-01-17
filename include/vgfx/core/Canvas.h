@@ -10,6 +10,7 @@
 #include "vgfx/core/BlendMode.h"
 #include "vgfx/core/Rect.h"
 #include "vgfx/core/Paint.h"
+#include "vgfx/core/Color.h"
 
 namespace vgfx {
     class Surface;
@@ -122,6 +123,13 @@ namespace vgfx {
          * @param paint
          */
         void drawRect(const Rect &rect, const Paint &paint);
+
+        /**
+         * Fill clip with color. This has the effect of replacing all pixels contained by clip with
+         * color.
+         * @param color
+         */
+        void clear(const Color &color = Color::Transparent());
 
     private:
         Surface *surface = nullptr;

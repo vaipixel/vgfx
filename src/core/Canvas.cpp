@@ -29,5 +29,9 @@ namespace vgfx {
         delete drawContext;
     }
 
+    void Canvas::clear(const vgfx::Color &color) {
+
+    }
+
 
 }
