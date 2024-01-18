@@ -5,6 +5,7 @@
 #include "vgfx/gpu/Surface.h"
 #include "utils/PixelFormatUtil.h"
 #include "gpu/proxies/RenderTargetProxy.h"
+#include "utils/Logger.h"
 
 namespace vgfx {
     std::shared_ptr<Surface> Surface::Make(vgfx::Context *context, int width, int height, bool alphaOnly,
@@ -24,6 +25,37 @@ namespace vgfx {
             surface->getCanvas()->clear();
         }
         return surface;
+    }
+
+    std::shared_ptr<Surface> Surface::MakeFrom(vgfx::Context *context,
+                                               const vgfx::BackendRenderTarget &renderTarget,
+                                               vgfx::ImageOrigin origin, const vgfx::SurfaceOptions *options) {
+        auto proxy = RenderTargetProxy::MakeFrom(context, renderTarget, origin);
+        return MakeFrom(std::move(proxy), options);
+    }
+
+    std::shared_ptr<Surface> Surface::MakeFrom(vgfx::Context *context,
+                                               const vgfx::BackendTexture &backendTexture,
+                                               vgfx::ImageOrigin origin,
+                                               int sampleCount, const vgfx::SurfaceOptions *options) {
+        auto proxy = RenderTargetProxy::MakeFrom(context, backendTexture, sampleCount, origin);
+        return MakeFrom(std::move(proxy), options);
+    }
+
+    std::shared_ptr<Surface>
+    Surface::MakeFrom(vgfx::Context *context, vgfx::HardwareBufferRef hardwareBuffer, int sampleCount,
+                      const vgfx::SurfaceOptions *options) {
+        auto proxy = RenderTargetProxy::MakeFrom(context, hardwareBuffer, sampleCount);
+        return MakeFrom(std::move(proxy), options);
+    }
+
+    std::shared_ptr<Surface> Surface::MakeFrom(std::shared_ptr<RenderTargetProxy> renderTargetProxy,
+                                               const vgfx::SurfaceOptions *options) {
+        if (renderTargetProxy == nullptr) {
+            logd("renderTargetProxy is nullptr");
+            return nullptr;
+        }
+        return std::shared_ptr<Surface>(new Surface(std::move(renderTargetProxy), options));
     }
 
 }

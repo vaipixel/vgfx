@@ -22,7 +22,10 @@ void JVGFXView::draw() {
         device->unlock();
         return;
     }
-    auto canvas = surface->getCanvas()
+    auto canvas = surface->getCanvas();
+    canvas->clear();
+    canvas->save();
+    canvas->drawRect({0, 0, 100, 100}, {});
 }
 
 static JVGFXView *GetJVGFXView(JNIEnv *env, jobject thiz) {
