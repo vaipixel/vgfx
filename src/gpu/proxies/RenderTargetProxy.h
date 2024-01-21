@@ -5,7 +5,6 @@
 #pragma once
 
 #include <memory>
-#include "ResourceProxy.h"
 #include "vgfx/gpu/Context.h"
 #include "gpu/Backend.h"
 #include "vgfx/gpu/ImageOrigin.h"
@@ -16,6 +15,8 @@
 #include "gpu/RenderTarget.h"
 
 namespace vgfx {
+    class TextureProxy;
+    class ResourceProxy;
 
     /**
      * This class delays the acquisition of render targets until they are actually required.

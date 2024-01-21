@@ -58,4 +58,41 @@ namespace vgfx {
         return std::shared_ptr<Surface>(new Surface(std::move(renderTargetProxy), options));
     }
 
+    Surface::Surface(std::shared_ptr<RenderTargetProxy> proxy, const vgfx::SurfaceOptions *options)
+            : renderTargetProxy(proxy) {
+        DEBUG_ASSERT(this->renderTargetProxy != nullptr);
+        if (options != nullptr) {
+            surfaceOptions = *options;
+        }
+    }
+
+    Surface::~Surface() {
+        delete canvas;
+    }
+
+    Context *Surface::getContext() const {
+        return renderTargetProxy->getContext();
+    }
+
+    int Surface::width() const {
+        return renderTargetProxy->width();
+    }
+
+    int Surface::height() const {
+        return renderTargetProxy->height();
+    }
+
+    ImageOrigin Surface::origin() const {
+        return renderTargetProxy->origin();
+    }
+
+    std::shared_ptr<TextureProxy> Surface::getTextureProxy() {
+        if (!renderTargetProxy->isTextureBackend()) {
+            return nullptr;
+        }
+        auto drawingManager = getContext()->drawingManager();
+        drawingManager->addTextureResolveTask(renderTargetProxy);
+        return renderTargetProxy->getTextureProxy();
+    }
+
 }
