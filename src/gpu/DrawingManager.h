@@ -9,7 +9,7 @@
 #include "vgfx/gpu/Context.h"
 #include "gpu/tasks/ResourceTask.h"
 #include "gpu/proxies/RenderTask.h"
-#include "gpu/proxies/OpsRenderTask.h"
+#include "gpu/tasks/OpsRenderTask.h"
 #include "gpu/proxies/RenderTargetProxy.h"
 #include "vgfx/core/Rect.h"
 #include "vgfx/core/Point.h"

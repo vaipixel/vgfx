@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "RenderTask.h"
+#include "gpu/proxies/RenderTask.h"
 
 namespace vgfx {
 

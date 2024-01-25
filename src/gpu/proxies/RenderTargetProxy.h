@@ -5,18 +5,14 @@
 #pragma once
 
 #include <memory>
-#include "vgfx/gpu/Context.h"
-#include "gpu/Backend.h"
-#include "vgfx/gpu/ImageOrigin.h"
+#include "TextureProxy.h"
+#include "gpu/RenderTarget.h"
+#include "ResourceProxy.h"
 #include "vgfx/platform/HardwareBuffer.h"
 #include "vgfx/gpu/PixelFormat.h"
-#include "TextureProxy.h"
 #include "gpu/Texture.h"
-#include "gpu/RenderTarget.h"
 
 namespace vgfx {
-    class TextureProxy;
-    class ResourceProxy;
 
     /**
      * This class delays the acquisition of render targets until they are actually required.
@@ -169,6 +165,8 @@ namespace vgfx {
         PixelFormat _format = PixelFormat::RGBA_8888;
         int _sampleCount = 1;
         ImageOrigin _origin = ImageOrigin::TopLeft;
+
+        friend class ProxyProvider;
     };
 
 } // vgfx
