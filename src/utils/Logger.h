@@ -3,10 +3,12 @@
 //
 
 #include <string>
+#include "vgfx/platform/Print.h"
 
 namespace vgfx {
 
-    void logd(const std::string &message);
+#define LOGI(...) ::vgfx::PrintLog(__VA_ARGS__)
+#define LOGE(...) ::vgfx::PrintError(__VA_ARGS__)
 
 #if DEBUG
 #define DEBUG_ASSERT(assertion) ASSERT(assertion)
