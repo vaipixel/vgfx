@@ -11,6 +11,12 @@
 #include "vgfx/core/Rect.h"
 #include "vgfx/core/Paint.h"
 #include "vgfx/core/Color.h"
+#include "vgfx/core/Path.h"
+#include "vgfx/core/SamplingOptions.h"
+#include "vgfx/core/Shape.h"
+#include "vgfx/core/Font.h"
+#include "vgfx/core/Typeface.h"
+#include "gpu/processors/FragmentProcessor.h"
 
 namespace vgfx {
     class Surface;
@@ -118,6 +124,26 @@ namespace vgfx {
         void setBlendMode(BlendMode blendMode);
 
         /**
+         * Returns the current total clip.
+         * @return
+         */
+        Path getTotalClip() const;
+
+        /**
+         * Replaces clip with the intersection of clip and rect. The resulting clip is aliased; pixels are
+         * fully contained by the clip. The rect is transformed by the current Matrix before it is combined
+         * with clip.
+         */
+        void clipRect();
+
+        /**
+         * Fills clip with color. This has the effect of replacing all pixels contained by clip with
+         * colors.
+         * @param color
+         */
+        void clear(const Color &color = Color::Transparent());
+
+        /**
          * Draws a rectangle with specified paint, using current alpha, blend mode, clip and matrix.
          * @param rect
          * @param paint
@@ -125,19 +151,103 @@ namespace vgfx {
         void drawRect(const Rect &rect, const Paint &paint);
 
         /**
-         * Fill clip with color. This has the effect of replacing all pixels contained by clip with
-         * color.
-         * @param color
+         * Draw a path with using current clip, matrix and specified paint.
+         * @param path
+         * @param paint
          */
-        void clear(const Color &color = Color::Transparent());
+        void drawPath(const Path &path, const Paint &paint);
+
+        /**
+         * Draws a shape with using current clip, matrix and specified paint.
+         * @param share
+         * @param paint
+         */
+        void drawShape(std::shared_ptr<Shape> share, const Paint &paint);
+
+        /**
+         * Draws an image, with its top-left corner at (left, top), using current clip, matrix and
+         * optional paint. If image->hasMipmaps() is true, uses FilterMode::Linear and MipmapMode::Linear
+         * as the sampling options, Otherwise, uses FilterMode::Linear and MipmapMode::None as the
+         * sampling options.
+         * @param image
+         * @param left
+         * @param top
+         * @param paint
+         */
+        void drawImage(std::shared_ptr<Image> image, float left, float top, const Paint *paint = nullptr);
+
+        /**
+         * Draws a Image, with its top-left corner at (0, 0), using current alpha, clip and matrix
+         * premultiplied with existing Matrix. If image->hasMipmaps() is true, uses FilterMode::Linear
+         * as the sampling options. Otherwise, uses FilterMode::Linear and MipmapMode::None as the
+         * sampling options.
+         * @param image
+         * @param matrix
+         * @param paint
+         */
+        void drawImage(std::shared_ptr<Image> image, const Matrix &matrix, const Paint *paint = nullptr);
+
+        /**
+         * Draws an image, with its top-left corner at (0, 0), using current clip, matrix and optional
+         * paint. If image->hasMipmaps() is true, uses FilterMode::Linear and MipmapMode::Linear as the
+         * sampling options. Otherwise, uses FilterMode:Linear and MipmapMode::None as the sampling
+         * options.
+         * @param image
+         * @param paint
+         */
+        void drawImage(std::shared_ptr<Image> image, const Paint *paint = nullptr);
+
+        /**
+         * Draws an image, with its top-left corner at (0, 0), using current clip, matrix, sampling
+         * options and optional paint.
+         */
+        void drawImage(std::shared_ptr<Image> image, SamplingOptions sampling,
+                       const Paint *paint = nullptr);
+
+        /**
+         * Draws text, with origin at (x, y), using clip, matrix, font, and paint. The text must be in
+         * utf-8 encoding. This function uses the default character-to-glyph mapping from the Typeface in
+         * font. It does not perform typeface fallback for characters not found in the Typeface. Glyphs
+         * are positioned based on their default advances.
+         */
+        void drawSimpleText(const std::string &text, float x, float y, const Font &font,
+                            const Paint &paint);
+
 
     private:
         Surface *surface = nullptr;
         std::shared_ptr<Surface> _clipSurface = nullptr;
         uint32_t clipID = 0;
         std::shared_ptr<CanvasState> state = nullptr;
-        SurfaceDrawContext *drawContext = nullptr;
+        SurfaceDrawContext* drawContext = nullptr;
         std::vector<std::shared_ptr<CanvasState>> savedStateList = {};
+
+        bool nothingToDraw(const Paint &paint) const;
+
+        std::shared_ptr<TextureProxy> getClipTexture();
+
+        std::pair<std::optional<Rect>, bool> getClipRect();
+
+        std::unique_ptr<FragmentProcessor> getClipMask(const Rect &deviceBounds, Rect *scissorRect);
+
+        Rect clipLocalBounds(Rect localBounds);
+
+        std::unique_ptr<FragmentProcessor> getImageProcessor(std::shared_ptr<Image> image,
+                                                             SamplingOptions sampling,
+                                                             const Rect &clipBounds);
+
+        void drawMask(const Rect &bounds, std::shared_ptr<TextureProxy> mask, const Paint &paint);
+
+        void drawColorGlyphs(const GlyphID glyphIDs[], const Point positions[], size_t glyphCount,
+                             const Font &font, const Paint &paint);
+
+        void fillPath(const Path &path, const Paint &paint);
+
+        bool drawAsClear(const Path &path, const Paint &paint);
+
+        void drawOp(std::unique_ptr<DrawOp> op, const Paint &paint, bool aa = false);
+
+        Color getInputColor(const Paint &paint);
     };
 
 }
