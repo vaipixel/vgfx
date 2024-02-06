@@ -6,10 +6,10 @@
 #include "GLInterface.h"
 
 namespace vgfx {
-    static std::mutex interfaceLocker = {};
-    static std::unordered_map<int, std::unique_ptr<const GLInterface>> glInterfaceMap = {};
+static std::mutex interfaceLocker = {};
+static std::unordered_map<int, std::unique_ptr<const GLInterface>> glInterfaceMap = {};
 
-    static int GetGLVersion() {
-        return 0;
-    }
+static int GetGLVersion() {
+  return 0;
+}
 } // vgfx

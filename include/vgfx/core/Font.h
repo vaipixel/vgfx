@@ -6,11 +6,11 @@
 
 namespace vgfx {
 
-    /**
-     * Font controls options applied when drawing and measuring text.
-     */
-    class Font {
+/**
+ * Font controls options applied when drawing and measuring text.
+ */
+class Font {
 
-    };
+};
 
 } // vgfx

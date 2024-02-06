@@ -13,71 +13,69 @@
 #include <cstddef>
 
 namespace vgfx {
-    class DrawingManager;
-    class Device;
+class DrawingManager;
+class Device;
 
-    class Context {
-    public:
-        virtual ~Context();
+class Context {
+ public:
+  virtual ~Context();
 
-        /**
-         * Return the associated device.
-         * @return
-         */
-        Device *device() const {
-            return _device;
-        }
+  /**
+   * Return the associated device.
+   * @return
+   */
+  Device *device() const {
+    return _device;
+  }
 
-        ProgramCache *programCache() const {
-            return _programCache;
-        }
+  ProgramCache *programCache() const {
+    return _programCache;
+  }
 
-        ResourceCache *resourceCache() const {
-            return _resourceCache;
-        }
+  ResourceCache *resourceCache() const {
+    return _resourceCache;
+  }
 
-        DrawingManager *drawingManager() const {
-            return _drawingManager;
-        }
+  DrawingManager *drawingManager() const {
+    return _drawingManager;
+  }
 
-        ResourceProvider *resourceProvider() const {
-            return _resourceProvider;
-        }
+  ResourceProvider *resourceProvider() const {
+    return _resourceProvider;
+  }
 
-        ProxyProvider *proxyProvider() const {
-            return _proxyProvider;
-        }
+  ProxyProvider *proxyProvider() const {
+    return _proxyProvider;
+  }
 
-        /**
-         * Return the number if bytes consumed by internal gpu cache.
-         * @return
-         */
-        size_t memoryUsage() const;
+  /**
+   * Return the number if bytes consumed by internal gpu cache.
+   * @return
+   */
+  size_t memoryUsage() const;
 
-        size_t purgeableBytes() const;
+  size_t purgeableBytes() const;
 
-        size_t cacheLimit() const;
+  size_t cacheLimit() const;
 
-        void setCacheLimit(size_t bytesLimit);
+  void setCacheLimit(size_t bytesLimit);
 
+  bool wait();
 
-        bool wait();
+ protected:
+  explicit Context(Device *device);
 
+ private:
+  Device *_device = nullptr;
+  ProgramCache *_programCache = nullptr;
+  ResourceCache *_resourceCache = nullptr;
+  DrawingManager *_drawingManager = nullptr;
+  ResourceProvider *_resourceProvider = nullptr;
+  ProxyProvider *_proxyProvider = nullptr;
 
-    protected:
-        explicit Context(Device *device);
+  void releaseAll(bool releaseGPU);
 
-    private:
-        Device *_device = nullptr;
-        ProgramCache *_programCache = nullptr;
-        ResourceCache *_resourceCache = nullptr;
-        DrawingManager *_drawingManager = nullptr;
-        ResourceProvider *_resourceProvider = nullptr;
-        ProxyProvider *_proxyProvider = nullptr;
-
-        void releaseAll(bool releaseGPU);
-
-        friend class Device;
-    };
+  friend class Device;
+};
 
 } // vgfx

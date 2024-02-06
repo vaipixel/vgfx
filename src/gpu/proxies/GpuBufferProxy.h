@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    class GpuBufferProxy {
+class GpuBufferProxy {
 
-    };
+};
 
 } // vgfx

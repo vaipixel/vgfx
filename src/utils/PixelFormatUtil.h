@@ -9,9 +9,9 @@
 #include "vgfx/gpu/PixelFormat.h"
 
 namespace vgfx {
-    PixelFormat ColorTypeToPixelFormat(ColorType type);
+PixelFormat ColorTypeToPixelFormat(ColorType type);
 
-    ColorType PixelFormatToColorType(PixelFormat format);
+ColorType PixelFormatToColorType(PixelFormat format);
 
-    size_t PixelFormatBytesPerPixel(PixelFormat format);
+size_t PixelFormatBytesPerPixel(PixelFormat format);
 } // vgfx

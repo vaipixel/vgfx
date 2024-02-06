@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    class ResourceProvider {
+class ResourceProvider {
 
-    };
+};
 
 } // vgfx

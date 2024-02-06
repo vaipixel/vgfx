@@ -9,16 +9,16 @@
 
 namespace vgfx {
 
-    class GLInterface;
+class GLInterface;
 
-    class GLContext : public Context {
-    public:
-        static GLContext *Unwrap(Context *context) {
-            return static_cast<GLContext *>(context);
-        }
+class GLContext : public Context {
+ public:
+  static GLContext *Unwrap(Context *context) {
+    return static_cast<GLContext *>(context);
+  }
 
-        GLContext(Device *device, const GLInterface *glInterface);
+  GLContext(Device *device, const GLInterface *glInterface);
 
-    };
+};
 
 } // vgfx

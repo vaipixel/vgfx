@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    class SurfaceOptions {
+class SurfaceOptions {
 
-    };
+};
 
 } // vgfx

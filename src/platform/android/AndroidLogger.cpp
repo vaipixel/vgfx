@@ -10,18 +10,18 @@
 namespace vgfx {
 #define LOG_TAG "vgfx"
 
-    void PrintLog(const char format[], ...) {
-        va_list args;
-        va_start(args, format);
-        __android_log_vprint(ANDROID_LOG_INFO, LOG_TAG, format, args);
-        va_end(args);
-    }
+void PrintLog(const char format[], ...) {
+  va_list args;
+  va_start(args, format);
+  __android_log_vprint(ANDROID_LOG_INFO, LOG_TAG, format, args);
+  va_end(args);
+}
 
-    void PrintError(const char format[], ...) {
-        va_list args;
-        va_start(args, format);
-        __android_log_vprint(ANDROID_LOG_ERROR, LOG_TAG, format, args);
-        va_end(args);
-    }
+void PrintError(const char format[], ...) {
+  va_list args;
+  va_start(args, format);
+  __android_log_vprint(ANDROID_LOG_ERROR, LOG_TAG, format, args);
+  va_end(args);
+}
 }
 #endif

@@ -9,35 +9,35 @@
 
 namespace vgfx {
 
-    /**
-     * The base class for all proxy-derived objects. It delays the acquisition of resources until they
-     * are actually required.
-     */
-    class ResourceProxy {
-    public:
-        virtual ~ResourceProxy() = default;
+/**
+ * The base class for all proxy-derived objects. It delays the acquisition of resources until they
+ * are actually required.
+ */
+class ResourceProxy {
+ public:
+  virtual ~ResourceProxy() = default;
 
-        /**
-         * Retrieves the context associated with this ResourceProxy.
-         * @return
-         */
-        Context *getContext() const {
-            return context;
-        }
+  /**
+   * Retrieves the context associated with this ResourceProxy.
+   * @return
+   */
+  Context *getContext() const {
+    return context;
+  }
 
-        /**
-         * Return the ResourceKey associated with this ResourceProxy.
-         * @return
-         */
-        const ResourceKey& getResourceKey() const {
-            return resourceKey;
-        }
-    protected:
-        Context *context = nullptr;
-        ResourceKey resourceKey = {};
+  /**
+   * Return the ResourceKey associated with this ResourceProxy.
+   * @return
+   */
+  const ResourceKey &getResourceKey() const {
+    return resourceKey;
+  }
+ protected:
+  Context *context = nullptr;
+  ResourceKey resourceKey = {};
 
-        ResourceProxy() = default;
+  ResourceProxy() = default;
 
-        friend Context;
-    };
+  friend Context;
+};
 }

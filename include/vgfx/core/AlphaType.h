@@ -6,14 +6,14 @@
 
 namespace vgfx {
 
-    /**
-     * Describes how to interpret the alpha component of a pixel.
-     */
-    enum class AlphaType {
-        Unknown,
-        Opaque,
-        Premultiplied,
-        Unpremultiplied,
-    };
+/**
+ * Describes how to interpret the alpha component of a pixel.
+ */
+enum class AlphaType {
+  Unknown,
+  Opaque,
+  Premultiplied,
+  Unpremultiplied,
+};
 
 } // vgfx

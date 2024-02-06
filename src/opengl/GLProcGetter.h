@@ -7,12 +7,12 @@
 #include <memory>
 
 namespace vgfx {
-    class GLProcGetter {
-    public:
-        static std::unique_ptr<GLProcGetter> Make();
+class GLProcGetter {
+ public:
+  static std::unique_ptr<GLProcGetter> Make();
 
-        virtual ~GLProcGetter() = default;
+  virtual ~GLProcGetter() = default;
 
-        virtual void *getProcAddress(const char name[]) const = 0;
-    };
+  virtual void *getProcAddress(const char name[]) const = 0;
+};
 }

@@ -7,14 +7,14 @@
 #include <mutex>
 
 namespace vgfx {
-    typedef uint64_t GlyphID;
-    typedef int32_t Unichar;
-    typedef uint32_t FontTableTag;
+typedef uint64_t GlyphID;
+typedef int32_t Unichar;
+typedef uint32_t FontTableTag;
 
-    /**
-     * A set of character glyphs and layout information for drawing text.
-     */
-    class Typeface {
+/**
+ * A set of character glyphs and layout information for drawing text.
+ */
+class Typeface {
 
-    };
+};
 }

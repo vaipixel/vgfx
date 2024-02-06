@@ -8,8 +8,8 @@
 
 namespace vgfx {
 
-    class FragmentProcessor : public Processor {
+class FragmentProcessor : public Processor {
 
-    };
+};
 
 } // vgfx

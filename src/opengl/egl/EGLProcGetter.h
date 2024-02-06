@@ -8,9 +8,9 @@
 
 namespace vgfx {
 
-    class EGLProcGetter : public GLProcGetter {
-    public:
-        void *getProcAddress(const char *name) const override;
-    };
+class EGLProcGetter : public GLProcGetter {
+ public:
+  void *getProcAddress(const char *name) const override;
+};
 
 } // vgfx

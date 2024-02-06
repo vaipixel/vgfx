@@ -8,8 +8,8 @@
 
 namespace vgfx {
 
-    class EGLDevice : GLDevice {
+class EGLDevice : GLDevice {
 
-    };
+};
 
 } // vgfx

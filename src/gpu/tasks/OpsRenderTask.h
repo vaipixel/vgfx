@@ -8,8 +8,8 @@
 
 namespace vgfx {
 
-    class OpsRenderTask : public RenderTask {
+class OpsRenderTask : public RenderTask {
 
-    };
+};
 
 } // vgfx

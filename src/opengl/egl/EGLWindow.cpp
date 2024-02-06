@@ -5,6 +5,6 @@
 #include "vgfx/opengl/egl/EGLWindow.h"
 
 namespace vgfx {
-    std::shared_ptr<EGLWindow> EGLWindow::MakeFrom(EGLNativeWindowType nativeWindow, EGLContext sharedContext) {
-    }
+std::shared_ptr<EGLWindow> EGLWindow::MakeFrom(EGLNativeWindowType nativeWindow, EGLContext sharedContext) {
+}
 } // vgfx

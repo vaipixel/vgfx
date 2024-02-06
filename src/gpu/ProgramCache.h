@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    class ProgramCache {
+class ProgramCache {
 
-    };
+};
 
 } // vgfx

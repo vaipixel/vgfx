@@ -5,7 +5,9 @@
 #pragma once
 
 namespace vgfx {
-class Processor {
+class Path;
+struct Rect;
+class PathRef {
 
 };
 }

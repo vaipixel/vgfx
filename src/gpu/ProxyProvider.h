@@ -9,19 +9,19 @@
 
 namespace vgfx {
 
-    /**
-     * A factory for creating proxy-derived objects.
-     */
-    class ProxyProvider {
-    public:
-        explicit ProxyProvider(Context *context);
+/**
+ * A factory for creating proxy-derived objects.
+ */
+class ProxyProvider {
+ public:
+  explicit ProxyProvider(Context *context);
 
-        bool hasResourceProxy(const ResourceKey &resourceKey);
+  bool hasResourceProxy(const ResourceKey &resourceKey);
 
-        std::shared_ptr<GpuBufferProxy> createGpuBufferProxy(const ResourceKey &resourceKey,
-                                                             std::shared_ptr<Data> data,
-                                                             BufferType bufferType,
-                                                             uint32_t renderFlags = 0);
-    };
+  std::shared_ptr<GpuBufferProxy> createGpuBufferProxy(const ResourceKey &resourceKey,
+                                                       std::shared_ptr<Data> data,
+                                                       BufferType bufferType,
+                                                       uint32_t renderFlags = 0);
+};
 
 } // vgfx

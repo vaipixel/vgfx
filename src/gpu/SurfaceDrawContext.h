@@ -7,17 +7,17 @@
 #include "vgfx/gpu/Surface.h"
 
 namespace vgfx {
-    class Surface;
+class Surface;
 
-    class SurfaceDrawContext {
-    public:
-        explicit SurfaceDrawContext(Surface *surface) : surface(surface) {
+class SurfaceDrawContext {
+ public:
+  explicit SurfaceDrawContext(Surface *surface) : surface(surface) {
 
-        }
+  }
 
-    private:
-        Surface *surface = nullptr;
+ private:
+  Surface *surface = nullptr;
 
-    };
+};
 
 } // vgfx

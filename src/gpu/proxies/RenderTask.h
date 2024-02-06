@@ -5,7 +5,7 @@
 #pragma once
 
 namespace vgfx {
-    class RenderTask {
+class RenderTask {
 
-    };
+};
 }

@@ -12,16 +12,16 @@ struct __CVBuffer;
 
 namespace vgfx {
 #if defined(__ANDROID__) || defined(ANDROID)
-    typedef AHardwareBuffer *HardwareBufferRef;
+typedef AHardwareBuffer *HardwareBufferRef;
 #elif defined(__APPLE__)
-    typedef __CVBuffer* HardwareBufferRef;
+typedef __CVBuffer* HardwareBufferRef;
 #else
-    typedef void* HardwareBufferRef;
+typedef void* HardwareBufferRef;
 #endif
 
-    /**
-     * Returns true if the current platform has hardware buffer support. Otherwise, return false.
-     * @return
-     */
-    bool HardwareBufferAvailable();
+/**
+ * Returns true if the current platform has hardware buffer support. Otherwise, return false.
+ * @return
+ */
+bool HardwareBufferAvailable();
 }

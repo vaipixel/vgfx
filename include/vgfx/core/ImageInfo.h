@@ -10,15 +10,15 @@
 
 namespace vgfx {
 
-    /**
-     * ImageInfo describes the properties for and area of pixels.
-     */
-    class ImageInfo {
-    public:
-        static bool IsValidSize(int width, int height);
+/**
+ * ImageInfo describes the properties for and area of pixels.
+ */
+class ImageInfo {
+ public:
+  static bool IsValidSize(int width, int height);
 
-        static ImageInfo Make(int width, int height, ColorType colorType,
-                              AlphaType alphaType = AlphaType::Premultiplied, size_t rowBytes = 0);
-    };
+  static ImageInfo Make(int width, int height, ColorType colorType,
+                        AlphaType alphaType = AlphaType::Premultiplied, size_t rowBytes = 0);
+};
 
 } // vgfx

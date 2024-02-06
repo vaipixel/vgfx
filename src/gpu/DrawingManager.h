@@ -16,37 +16,37 @@
 
 namespace vgfx {
 
-    class DrawingManager {
+class DrawingManager {
 
-    public:
-        explicit DrawingManager(Context *context):context(context) {
+ public:
+  explicit DrawingManager(Context *context) : context(context) {
 
-        }
+  }
 
-        std::shared_ptr<OpsRenderTask> addOpsTask(std::shared_ptr<RenderTargetProxy> renderTargetProxy);
+  std::shared_ptr<OpsRenderTask> addOpsTask(std::shared_ptr<RenderTargetProxy> renderTargetProxy);
 
-        void addTextureResolveTask(std::shared_ptr<RenderTargetProxy> renderTargetProxy);
+  void addTextureResolveTask(std::shared_ptr<RenderTargetProxy> renderTargetProxy);
 
-        void addRenderTargetCopyTask(std::shared_ptr<RenderTargetProxy> source,
-                                     std::shared_ptr<TextureProxy> dest, Rect srcRect, Point dstPoint);
+  void addRenderTargetCopyTask(std::shared_ptr<RenderTargetProxy> source,
+                               std::shared_ptr<TextureProxy> dest, Rect srcRect, Point dstPoint);
 
-        void addResourceTask(std::shared_ptr<ResourceTask> resourceTask);
+  void addResourceTask(std::shared_ptr<ResourceTask> resourceTask);
 
-        /**
-         * Returns true if any render tasks were executed.
-         * @return
-         */
-        bool flush();
+  /**
+   * Returns true if any render tasks were executed.
+   * @return
+   */
+  bool flush();
 
-    private:
-        void closeActiveOpsTask();
+ private:
+  void closeActiveOpsTask();
 
-        Context *context = nullptr;
-        std::unordered_map<uint64_t, ResourceTask *> resourceTaskMap = {};
-        std::vector<std::shared_ptr<ResourceTask>> resourceTasks = {};
-        std::vector<std::shared_ptr<RenderTask>> renderTasks = {};
-        OpsRenderTask *activeOpsTask = nullptr;
+  Context *context = nullptr;
+  std::unordered_map<uint64_t, ResourceTask *> resourceTaskMap = {};
+  std::vector<std::shared_ptr<ResourceTask>> resourceTasks = {};
+  std::vector<std::shared_ptr<RenderTask>> renderTasks = {};
+  OpsRenderTask *activeOpsTask = nullptr;
 
-    };
+};
 
 } // vgfx

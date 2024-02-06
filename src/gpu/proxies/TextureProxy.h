@@ -9,41 +9,41 @@
 
 namespace vgfx {
 
-    /**
-     * This class delays the acquisition of textures until they are actually required.
-     */
-    class TextureProxy : public ResourceProxy {
-    public:
-        /**
-         * Return the width of the texture.
-         * @return
-         */
-        int width() const {
-            return _width;
-        }
+/**
+ * This class delays the acquisition of textures until they are actually required.
+ */
+class TextureProxy : public ResourceProxy {
+ public:
+  /**
+   * Return the width of the texture.
+   * @return
+   */
+  int width() const {
+    return _width;
+  }
 
-        /**
-         * Returns the height if the texture.
-         * @return
-         */
-        int height() const {
-            return _height;
-        }
+  /**
+   * Returns the height if the texture.
+   * @return
+   */
+  int height() const {
+    return _height;
+  }
 
-        bool hasMipmaps() const {
-            return mipMapped;
-        }
+  bool hasMipmaps() const {
+    return mipMapped;
+  }
 
-    private:
-        int _width = 0;
-        int _height = 0;
-        bool mipMapped = false;
-        bool _isAlphaOnly = false;
-        ImageOrigin _origin = ImageOrigin::TopLeft;
-        bool _externallyOwned = false;
+ private:
+  int _width = 0;
+  int _height = 0;
+  bool mipMapped = false;
+  bool _isAlphaOnly = false;
+  ImageOrigin _origin = ImageOrigin::TopLeft;
+  bool _externallyOwned = false;
 
-        TextureProxy(int width, int height, bool mipMapped, bool isAlphaOnly,
-                     ImageOrigin origin = ImageOrigin::TopLeft, bool externallyOwned = false);
-    };
+  TextureProxy(int width, int height, bool mipMapped, bool isAlphaOnly,
+               ImageOrigin origin = ImageOrigin::TopLeft, bool externallyOwned = false);
+};
 
 } // vgfx

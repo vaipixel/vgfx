@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    class Image {
+class Image {
 
-    };
+};
 
 } // vgfx

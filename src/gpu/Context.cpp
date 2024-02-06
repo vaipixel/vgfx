@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    void Context::releaseAll(bool releaseGPU) {
+void Context::releaseAll(bool releaseGPU) {
 
-    }
+}
 
 } // vgfx

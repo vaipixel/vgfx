@@ -7,42 +7,42 @@
 #include <cstdint>
 
 namespace vgfx {
-    class UniqueDomain;
+class UniqueDomain;
 
-    /**
-     * ResourceKey allows a cod path to create cached resources for which it is the exclusive user.
-     * The code path generates a unique domain which it sets on its keys. This guarantees that there are
-     * no cross-domain collisions. Please refer to the comments in Resource::getResourceKey() for more
-     * details.
-     */
-    class ResourceKey {
-    public:
-        static ResourceKey NewWeak();
+/**
+ * ResourceKey allows a cod path to create cached resources for which it is the exclusive user.
+ * The code path generates a unique domain which it sets on its keys. This guarantees that there are
+ * no cross-domain collisions. Please refer to the comments in Resource::getResourceKey() for more
+ * details.
+ */
+class ResourceKey {
+ public:
+  static ResourceKey NewWeak();
 
-        static ResourceKey NewStrong();
+  static ResourceKey NewStrong();
 
-        ResourceKey() = default;
+  ResourceKey() = default;
 
-        ResourceKey(const ResourceKey &key);
+  ResourceKey(const ResourceKey &key);
 
-        ResourceKey(ResourceKey &&key) noexcept;
+  ResourceKey(ResourceKey &&key) noexcept;
 
-        virtual ~ResourceKey();
+  virtual ~ResourceKey();
 
-        uint64_t domain() const;
+  uint64_t domain() const;
 
-        bool empty() const {
-            return uniqueDomain == nullptr;
-        }
+  bool empty() const {
+    return uniqueDomain == nullptr;
+  }
 
-        bool isStrong() const {
-            return strong;
-        }
+  bool isStrong() const {
+    return strong;
+  }
 
-    private:
-        UniqueDomain *uniqueDomain = nullptr;
-        bool strong = false;
+ private:
+  UniqueDomain *uniqueDomain = nullptr;
+  bool strong = false;
 
-        ResourceKey(UniqueDomain *block, bool strong);
-    };
+  ResourceKey(UniqueDomain *block, bool strong);
+};
 }

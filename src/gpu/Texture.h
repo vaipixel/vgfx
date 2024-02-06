@@ -8,11 +8,11 @@
 
 namespace vgfx {
 
-    /**
-     * Texture describes a two-dimensional array of pixels in the GPU backend for drawing.
-     */
-    class Texture : public Resource {
+/**
+ * Texture describes a two-dimensional array of pixels in the GPU backend for drawing.
+ */
+class Texture : public Resource {
 
-    };
+};
 
 } // vgfx

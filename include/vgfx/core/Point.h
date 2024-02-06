@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    class Point {
+class Point {
 
-    };
+};
 
 } // vgfx

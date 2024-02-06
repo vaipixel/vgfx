@@ -8,14 +8,14 @@
 
 namespace vgfx {
 
-    class GLInterface {
-    public:
-        static const GLInterface *Get(const Context *context);
+class GLInterface {
+ public:
+  static const GLInterface *Get(const Context *context);
 
-    private:
-        static const GLInterface *GetNative();
+ private:
+  static const GLInterface *GetNative();
 
-        static std::unique_ptr<const GLInterface> MakeNativeInterface();
-    };
+  static std::unique_ptr<const GLInterface> MakeNativeInterface();
+};
 
 } // vgfx

@@ -5,9 +5,9 @@
 #include "UniqueID.h"
 
 namespace vgfx {
-    static std::atomic_uint32_t IDCount = {1};
+static std::atomic_uint32_t IDCount = {1};
 
-    uint32_t UniqueID::Next() {
-        return IDCount++;
-    }
+uint32_t UniqueID::Next() {
+  return IDCount++;
+}
 } // vgfx

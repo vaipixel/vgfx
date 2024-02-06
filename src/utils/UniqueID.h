@@ -8,9 +8,9 @@
 
 namespace vgfx {
 
-    class UniqueID {
-    public:
-        static uint32_t Next();
-    };
+class UniqueID {
+ public:
+  static uint32_t Next();
+};
 
 } // vgfx

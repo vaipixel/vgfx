@@ -6,8 +6,8 @@
 
 namespace vgfx {
 
-    class ResourceTask {
+class ResourceTask {
 
-    };
+};
 
 } // vgfx

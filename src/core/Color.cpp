@@ -5,8 +5,8 @@
 #include "vgfx/core/Color.h"
 
 namespace vgfx {
-    const const Color &Color::Transparent() {
-        static const Color color = {0.0f, 0.0f, 0.0f, 0.0f};
-        return color;
-    }
+const const Color &Color::Transparent() {
+  static const Color color = {0.0f, 0.0f, 0.0f, 0.0f};
+  return color;
+}
 } // vgfx

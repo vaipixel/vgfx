@@ -6,36 +6,36 @@
 
 namespace vgfx {
 
-    /**
-     * RGBA color value, holding four floating point components. Color components are always in a known
-     * order.
-     */
-    struct Color {
-        /**
-         * Red component.
-         */
-        float red;
+/**
+ * RGBA color value, holding four floating point components. Color components are always in a known
+ * order.
+ */
+struct Color {
+  /**
+   * Red component.
+   */
+  float red;
 
-        /**
-         * Green component.
-         */
-        float green;
+  /**
+   * Green component.
+   */
+  float green;
 
-        /**
-         * Blue component.
-         */
-        float blue;
+  /**
+   * Blue component.
+   */
+  float blue;
 
-        /**
-         * Alpha component.
-         */
-        float alpha;
+  /**
+   * Alpha component.
+   */
+  float alpha;
 
-        /**
-         * Returns a fully transparent Color.
-         * @return
-         */
-        static const Color &Transparent();
-    };
+  /**
+   * Returns a fully transparent Color.
+   * @return
+   */
+  static const Color &Transparent();
+};
 
 } // vgfx
