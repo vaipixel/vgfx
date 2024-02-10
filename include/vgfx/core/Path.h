@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <memory>
 #include "vgfx/core/Matrix.h"
 #include "vgfx/core/PathFillType.h"
 #include "core/PathRef.h"
@@ -42,6 +43,8 @@ public:
   PathFillType getFillType() const;
 
   void setFillType(PathFillType fillType);
+
+  bool isInverseFillType() const;
 
  private:
   std::shared_ptr<PathRef> pathRef = nullptr;

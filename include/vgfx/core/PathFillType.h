@@ -52,4 +52,35 @@ enum class PathOp {
    */
   XOR,
 };
+
+/**
+ * PathVerb instructs Path how to interpret one or more Point, manage contour, and terminate Path.
+ */
+enum class PathVerb {
+  /**
+   * PathIterator returns 1 point.
+   */
+  Move,
+  /**
+   * PathIterator returns 2 points.
+   */
+  Line,
+  /**
+   * PathIterator returns 3 points.
+   */
+  Quad,
+  /**
+   * PathIterator returns 4 points.
+   */
+  Cubic,
+  /**
+   * PathIterator returns 0 points.
+   */
+  Close,
+};
+
+/**
+ * Zero to four Point are stored in points, depending on the returned PathVerb
+ */
+using PathInterator = std::function<void(PathVerb verb, const Point points[4], void *info)>;
 }
