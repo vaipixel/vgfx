@@ -4,11 +4,13 @@
 
 #pragma once
 
+#include <functional>
+
 namespace vgfx {
 /**
- * PathFillType selects the rule used to fill Path.
+ * PathType selects the rule used to fill Path.
  */
-enum class PathFillType {
+enum class PathType {
   /**
    * Enclosed by a non-zero sum of contour directions.
    */
@@ -82,5 +84,5 @@ enum class PathVerb {
 /**
  * Zero to four Point are stored in points, depending on the returned PathVerb
  */
-using PathInterator = std::function<void(PathVerb verb, const Point points[4], void *info)>;
+using PathIterator = std::function<void(PathVerb verb, const Point points[4], void *info)>;
 }

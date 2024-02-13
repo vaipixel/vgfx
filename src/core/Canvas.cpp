@@ -21,7 +21,36 @@ static uint32_t NextClipID() {
 
 Canvas::Canvas(vgfx::Surface *surface) : surface(surface), clipID(kDefaultClipID) {
   state = std::make_shared<CanvasState>();
-  state->clip.addRect
+  state->clip.addRect(0, 0, static_cast<float >(surface->width()),
+                      static_cast<float >(surface->height()));
+  state->clipID = NextClipID();
+}
+
+void Canvas::save() {
+  auto canvasState = std::make_shared<CanvasState>();
+  *canvasState = *state;
+  savedStateList.push_back(canvasState);
+}
+
+void Canvas::restore() {
+  if (savedStateList.empty()) {
+    LOGW("savedStateList is empty");
+    return;
+  }
+  state = savedStateList.back();
+  savedStateList.pop_back();
+}
+
+Matrix Canvas::getMatrix() const {
+  return state->matrix;
+}
+
+void Canvas::setMatrix(const vgfx::Matrix &matrix) {
+  state->matrix = matrix;
+}
+
+void Canvas::resetMatrix() {
+  state->matrix.reset();
 }
 
 Canvas::~Canvas() {

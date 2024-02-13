@@ -24,6 +24,8 @@ namespace vgfx {
  */
 void PrintLog(const char format[], ...);
 
+void PrintWarn(const char format[], ...);
+
 /**
    * Writes an error message pointed by format to the log facility of native platform.
  */

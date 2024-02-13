@@ -48,11 +48,120 @@ class Matrix {
     return m;
   }
 
+  /**
+   * Sets Matrix to translate by (tx, ty). Returned matrix is:
+   *
+   *       | 1 0 tx |
+   *       | 0 1 ty |
+   *       | 0 0  1 |
+   *
+   * @param tx  horizontal translation
+   * @param ty  vertical translation
+   * @return    Matrix with translation
+   */
+  static Matrix MakeTrans(float tx, float ty) {
+    Matrix m = {};
+    m.setTranslate(tx, ty);
+    return m;
+  }
+
+  /**
+   * Sets Matrix to:
+   *
+   *      | scaleX  skewX transX |
+   *      | skewY  scaleY transY |
+   *      |   0      0      1    |
+   *
+   * @param scaleX  horizontal scale factor
+   * @param skewX   horizontal skew factor
+   * @param transX  horizontal translation
+   * @param skewY   vertical skew factor
+   * @param scaleY  vertical scale factor
+   * @param transY  vertical translation
+   * @return        Matrix constructed from parameters
+   */
+  static Matrix MakeAll(float scaleX, float skewX, float transX, float skewY, float scaleY,
+                        float transY) {
+    Matrix m = {};
+    m.setAll(scaleX, skewX, transX, scaleY, skewY, transY);
+    return m;
+  }
+
+  /**
+   * Returns true if Matrix is identity. The identity matrix is:
+   *
+   *       | 1 0 0 |
+   *       | 0 1 0 |
+   *       | 0 0 1 |
+   *
+   * @return  Returns true if the Matrix has no effect.
+   */
   bool isIdentity() const {
     return values[0] == 1 && values[1] == 0 && values[2] == 0 && values[3] == 0 && values[4] == 1 &&
         values[5] == 0;
   }
 
+  /**
+   * Returns one matrix value.
+   */
+  float operator[](int index) const {
+    return values[index];
+  }
+
+  /**
+   * Returns writable Matrix value. */
+  float &operator[](int index) {
+    return values[index];
+  }
+
+  float get(int index) const {
+    return values[index];
+  }
+
+  void set(int index, float value) {
+    values[index] = value;
+  }
+
+  void get6(float buffer[6]) const {
+    memcpy(buffer, values, 6 * sizeof(float));
+  }
+
+  void set6(const float buffer[6]) {
+    memcpy(values, buffer, 6 * sizeof(float));
+  }
+
+  void get9(float buffer[9]) const;
+
+  float getScaleX() const {
+    return values[SCALE_X];
+  }
+  float getScaleY() const {
+    return values[SCALE_Y];
+  }
+
+  float getSkewX() const {
+    return values[SKEW_X];
+  }
+
+  float getSkewY() const {
+    return values[SKEW_Y];
+  }
+  float getTranslateX() const {
+    return values[TRANS_X];
+  }
+  float getTranslateY() const {
+    return values[TRANS_Y];
+  }
+
+  void setScaleX(float v) { values[SCALE_X] = v; }
+
+  void setScaleY(float v) {
+    values[SCALE_Y] = v;
+  }
+
+  void setSkewX(float v) {
+    values[SKEW_X] = v;
+  }
   /**
    * Sets Matrix to translate by (tx, ty).
    * @param tx  horizontal translation.

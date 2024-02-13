@@ -17,6 +17,13 @@ void PrintLog(const char format[], ...) {
   va_end(args);
 }
 
+void PrintWarn(const char format[], ...) {
+  va_list args;
+  va_start(args, format);
+  __android_log_vprint(ANDROID_LOG_WARN, LOG_TAG, format, args);
+  va_end(args);
+}
+
 void PrintError(const char format[], ...) {
   va_list args;
   va_start(args, format);
