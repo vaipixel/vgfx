@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "Point.h"
 namespace vgfx {
 
 /**
@@ -36,5 +37,12 @@ struct Rect {
   static constexpr Rect MakeEmpty() {
     return {0, 0, 0, 0};
   }
+};
+
+struct RRect {
+  Rect rect = Rect::MakeEmpty();
+  Point radii = Point::Zero();
+
+  void scale(float scaleX, float scaleY);
 };
 }

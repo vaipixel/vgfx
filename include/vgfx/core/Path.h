@@ -18,7 +18,7 @@ namespace vgfx {
  * closed contour. Path may contain any number of contours, each beginning with a move verb.
  */
 class Path {
-public:
+ public:
   /**
    * Creates an empty path.
    */
@@ -40,11 +40,39 @@ public:
    */
   friend bool operator!=(const Path &a, const Path &b);
 
+  /**
+   * Returns PathFillType, the rule used to fill Path. PathFillType of a new Path is Path
+   * FillType::Winding.
+   */
   PathFillType getFillType() const;
 
+  /**
+   * Sets PathFillType, the rule used to fill Path.
+   */
   void setFillType(PathFillType fillType);
 
+  /**
+   * Returns if PathFillType is InverseWinding or InverseEvenOdd.
+   */
   bool isInverseFillType() const;
+
+  /**
+   * Replaces PathFillType with its inverse.
+   */
+  void toggleInverseFillType();
+
+  /**
+   * Returns true if Path is equivalent to Rect when filled, Otherwise returns false, and leaves
+   * rect unchanged. The rect may be smaller than the Path bounds. Path bounds may include
+   * PathVerb::Move points that do not alter the area drawn by the returned rect.
+  */
+  bool asRect(Rect *rect) const;
+
+  /**
+   * Returns true if Path is equivalent to RRect when filled, Otherwise returns false, and leaves
+   * rRect unchanged.
+   */
+  bool asRRect(RRect *rRect) const;
 
  private:
   std::shared_ptr<PathRef> pathRef = nullptr;

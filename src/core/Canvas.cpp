@@ -21,7 +21,7 @@ static uint32_t NextClipID() {
 
 Canvas::Canvas(vgfx::Surface *surface) : surface(surface), clipID(kDefaultClipID) {
   state = std::make_shared<CanvasState>();
-  state->clip.add
+  state->clip.addRect
 }
 
 Canvas::~Canvas() {
