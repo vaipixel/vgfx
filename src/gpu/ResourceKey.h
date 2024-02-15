@@ -10,17 +10,23 @@ namespace vgfx {
 class UniqueDomain;
 
 /**
- * ResourceKey allows a cod path to create cached resources for which it is the exclusive user.
+ * ResourceKey allows a code path to create cached resources for which it is the exclusive user.
  * The code path generates a unique domain which it sets on its keys. This guarantees that there are
- * no cross-domain collisions. Please refer to the comments in Resource::getResourceKey() for more
- * details.
+ * no cross-domain collisions. When a resource is only referenced by ResourceKeys, it falls under
+ * the management of the Context and can be destroyed at any time. To maintain a strong reference to
+ * the resource, use the ResourceHandle class. For further details on the differences between
+ * ResourceKeys and recycle keys, please refer to the comments in Resource::getResourceKey() and
+ * Resource::getRecycleKey().
  */
 class ResourceKey {
  public:
-  static ResourceKey NewWeak();
-
-  static ResourceKey NewStrong();
-
+  /**
+   * Creates a new ResourceKey with a valid domain.
+   */
+  static ResourceKey Make();
+  /**
+   * Creates an empty ResourceKey.
+   */
   ResourceKey() = default;
 
   ResourceKey(const ResourceKey &key);
@@ -28,21 +34,44 @@ class ResourceKey {
   ResourceKey(ResourceKey &&key) noexcept;
 
   virtual ~ResourceKey();
-
+  /**
+   * Returns a global unique ID of the domain. Returns 0 if the ResourceKey is empty.
+   */
   uint64_t domain() const;
 
+  /**
+   * Returns true if the ResourceKey has no valid domain.
+   */
   bool empty() const {
     return uniqueDomain == nullptr;
   }
 
-  bool isStrong() const {
-    return strong;
-  }
+  /**
+   * Returns the total number of times the domain has been referenced.
+   */
+  long useCount() const;
+
+  /**
+   * Returns the number of times the domain has been strongly referenced.
+   */
+  long strongCount() const;
+
+  ResourceKey &operator=(const ResourceKey &key);
+
+  ResourceKey &operator=(ResourceKey &&key) noexcept;
+
+  bool operator==(const ResourceKey &key) const;
+
+  bool operator!=(const ResourceKey &key) const;
 
  private:
   UniqueDomain *uniqueDomain = nullptr;
-  bool strong = false;
 
-  ResourceKey(UniqueDomain *block, bool strong);
+  explicit ResourceKey(UniqueDomain *block);
+
+  void addStrong();
+
+  void releaseStrong();
+
 };
 }

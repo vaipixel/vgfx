@@ -5,6 +5,8 @@
 #pragma once
 
 #include <cstring>
+#include "Point.h"
+#include "Rect.h"
 
 namespace vgfx {
 
@@ -162,12 +164,174 @@ class Matrix {
   void setSkewX(float v) {
     values[SKEW_X] = v;
   }
+
+  void setSkewY(float v) {
+    values[SKEW_Y] = v;
+  }
+
+  void setTranslateX(float v) {
+    values[TRANS_X] = v;
+  }
+
+  void setTranslateY(float v) {
+    values[TRANS_Y] = v;
+  }
+
   /**
-   * Sets Matrix to translate by (tx, ty).
-   * @param tx  horizontal translation.
-   * @param ty  vertical translation.
+   *
+   * @param scaleX
+   * @param skewX
+   * @param transX
+   * @param scaleY
+   * @param skewY
+   * @param transY
    */
-  void setScale(float tx, float ty);
+  void setAll(float scaleX, float skewX, float transX, float skewY, float scaleY, float transY);
+
+  /**
+   * Sets the Matrix to affine values, passed in column major order:
+   *
+   *      | a c tx |
+   *      | b d ty |
+   *      | 0    1 |
+   *
+   * @param a
+   * @param b
+   * @param c
+   * @param d
+   * @param tx
+   * @param ty
+   */
+  void setAffine(float a, float b, float c, float d, float tx, float ty);
+
+  /**
+   * Sets Matrix to identity; which has no effect on mapped Point. Sets Matrix to:
+   *
+   *       | 1 0 0 |
+   *       | 0 1 0 |
+   *       | 0 0 1 |
+   *
+   * Also called setIdentity(); use the one that provides better inline documentation.
+   */
+  void reset();
+
+  void setIdentity() {
+    this->reset();
+  }
+
+  void setTranslate(float tx, float ty);
+
+  /**
+   * Sets Matrix to scale by sx and sy, about a pivot point at (px, py). The pivot point is
+   * unchanged when mapped with Matrix.
+   * @param sx  horizontal scale factor
+   * @param sy  vertical scale factor
+   * @param px  pivot on x-axis
+   * @param py  pivot on y-axis
+   */
+  void setScale(float sx, float sy, float px, float py);
+
+  /**
+   * Sets Matrix to scale by sx and sy about at pivot point at (0, 0).
+   * @param sx  horizontal scale factor
+   * @param sy  vertical scale factor
+   */
+  void setScale(float sx, float sy);
+
+  void setRotate(float degrees, float px, float py);
+
+  void setRotate(float degrees);
+
+  void setSinCos(float sinV, float cosV, float px, float py);
+
+  void setSinCos(float sinV, float cosV);
+
+  void setSkew(float kx, float ky, float px, float py);
+
+  void setSkew(float kx, float ky);
+
+  void setConcat(const Matrix &a, const Matrix &b);
+
+  void preTranslate(float tx, float ty);
+
+  void preScale(float sx, float sy);
+
+  void preRotate(float degrees, float px, float py);
+
+  void preRotate(float degrees);
+
+  void preSkew(float kx, float ky, float px, float py);
+
+  void preSkew(float kx, float ky);
+
+  void preConcat(const Matrix &other);
+
+  void postTranslate(float tx, float ty);
+
+  void postScale(float sx, float sy, float px, float py);
+
+  void postScale(float sx, float sy);
+
+  void postRotate(float degrees, float px, float py);
+
+  void postRotate(float degrees);
+
+  void postSkew(float kx, float ky, float px, float py);
+
+  void postSkew(float kx, float ky);
+
+  void postConcat(const Matrix &other);
+
+  bool invert(Matrix *inverse) const {
+    if (this->isIdentity()) {
+      if (inverse) {
+        inverse->reset();
+      }
+      return true;
+    }
+    return this->invertNonIdentity(inverse);
+  }
+
+  bool invertible() const;
+
+  void mapPoints(Point dst[], const Point src[], int count) const;
+
+  void mapPoints(Point pts[], int count) const {
+    this->mapPoints(pts, pts, count);
+  }
+
+  void mapXY(float x, float y, Point *result) const;
+
+  Point mapXY(float x, float y) const {
+    Point result = {};
+    this->mapXY(x, y, &result);
+    return result;
+  }
+  bool rectStaysRect() const;
+
+  void mapRect(Rect *dst, const Rect &src) const;
+
+  void mapRect(Rect *rect) const {
+    mapRect(rect, *rect);
+  }
+
+  Rect mapRect(const Rect &src) const {
+    Rect dst = {};
+    mapRect(&dst, src);
+    return dst;
+  }
+
+  friend bool operator==(const Matrix &a, const Matrix &b);
+
+  friend bool operator!=(const Matrix &a, const Matrix &b) {
+    return !(a == b);
+  }
+
+  float getMinScale() const;
+
+  float getMaxScale() const;
+
+  bool isFinite() const;
 
   /**
    * Returns reference to const identity Matrix. Returned Matrix is set to:
@@ -194,6 +358,8 @@ class Matrix {
   static constexpr int TRANS_Y = 5;  //!< vertical translation
 
   void setScaleTranslate(float sx, float sy, float tx, float ty);
+  bool invertNonIdentity(Matrix *inverse) const;
+  bool getMinMaxScaleFactors(float results[2]) const;
 };
 
 } // vgfx

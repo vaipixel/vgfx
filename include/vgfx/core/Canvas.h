@@ -134,7 +134,13 @@ class Canvas {
    * fully contained by the clip. The rect is transformed by the current Matrix before it is combined
    * with clip.
    */
-  void clipRect();
+  void clipRect(const Rect& rect);
+
+  /**
+   * Replaces clip with the intersection of clip and path. The path is transformed by Matrix before
+   * it is combined with clip.
+   */
+  void clipPath(const Path &path);
 
   /**
    * Fills clip with color. This has the effect of replacing all pixels contained by clip with

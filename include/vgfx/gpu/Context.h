@@ -10,6 +10,7 @@
 #include "gpu/DrawingManager.h"
 #include "gpu/ResourceProvider.h"
 #include "gpu/ProxyProvider.h"
+#include "gpu/Gpu.h"
 #include <cstddef>
 
 namespace vgfx {
@@ -64,6 +65,8 @@ class Context {
 
  protected:
   explicit Context(Device *device);
+
+  Gpu *_gpu = nullptr;
 
  private:
   Device *_device = nullptr;
