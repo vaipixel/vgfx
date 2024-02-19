@@ -5,9 +5,10 @@
 #pragma once
 
 #include <memory>
-#include "Color.h"
-#include "Stroke.h"
-#include "Shader.h"
+#include "vgfx/core/Color.h"
+#include "vgfx/core/Stroke.h"
+#include "vgfx/core/Shader.h"
+#include "vgfx/core/MaskFilter.h"
 namespace vgfx {
 
 /**
