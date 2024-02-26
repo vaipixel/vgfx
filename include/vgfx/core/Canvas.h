@@ -17,6 +17,7 @@
 #include "vgfx/core/Font.h"
 #include "vgfx/core/Typeface.h"
 #include "gpu/processors/FragmentProcessor.h"
+#include "TextBlob.h"
 
 namespace vgfx {
 class Surface;
@@ -134,7 +135,7 @@ class Canvas {
    * fully contained by the clip. The rect is transformed by the current Matrix before it is combined
    * with clip.
    */
-  void clipRect(const Rect& rect);
+  void clipRect(const Rect &rect);
 
   /**
    * Replaces clip with the intersection of clip and path. The path is transformed by Matrix before
@@ -219,6 +220,21 @@ class Canvas {
   void drawSimpleText(const std::string &text, float x, float y, const Font &font,
                       const Paint &paint);
 
+  /**
+   * Draw an array of glyphs with specified font, using current alpha, blend mode, clip and Matrix.
+   */
+  void drawGlyphs(const GlyphID glyphIDs[], const Point positions[], size_t glyphCount,
+                  const Font &font, const Paint &paint);
+
+  // TODO(pengweilv): Support blend mode, atlas as source, colors as destination, colors can be
+  //  nullptr.
+  void drawAtlas(std::shared_ptr<Image> atlas, const Matrix matrix[], const Rect tex[],
+                 const Color colors[], size_t count, SamplingOptions sampling = SamplingOptions());
+
+  /**
+   * Triggers the immediate execution of all pending draw operations.
+   */
+  void flush();
  private:
   Surface *surface = nullptr;
   std::shared_ptr<Surface> _clipSurface = nullptr;
@@ -231,28 +247,23 @@ class Canvas {
 
   std::shared_ptr<TextureProxy> getClipTexture();
 
-  std::pair<std::optional<Rect>, bool> getClipRect();
+  std::pair<std::optional<Rect>, bool> getClipRect(const Rect *drawBounds = nullptr);
 
   std::unique_ptr<FragmentProcessor> getClipMask(const Rect &deviceBounds, Rect *scissorRect);
 
   Rect clipLocalBounds(Rect localBounds);
 
-  std::unique_ptr<FragmentProcessor> getImageProcessor(std::shared_ptr<Image> image,
-                                                       SamplingOptions sampling,
-                                                       const Rect &clipBounds);
-
-  void drawMask(const Rect &bounds, std::shared_ptr<TextureProxy> mask, const Paint &paint);
+  void drawMask(const Rect &bounds, std::shared_ptr<TextureProxy> mask,
+                const Paint &paint);
 
   void drawColorGlyphs(const GlyphID glyphIDs[], const Point positions[], size_t glyphCount,
                        const Font &font, const Paint &paint);
-
-  void fillPath(const Path &path, const Paint &paint);
-
+  void drawMaskGlyphs(std::shared_ptr<TextBlob> textBlob, const Paint &paint);
   bool drawAsClear(const Path &path, const Paint &paint);
-
-  void drawOp(std::unique_ptr<DrawOp> op, const Paint &paint, bool aa = false);
-
   Color getInputColor(const Paint &paint);
+  bool getProcessors(const DrawArgs& args, const Paint& paint, DrawOp* drawOp);
+  void addDrawOp(std::unique_ptr<DrawOp> op, const DrawArgs& args, const Paint& paint,
+                 bool aa = false);
 };
 
 }

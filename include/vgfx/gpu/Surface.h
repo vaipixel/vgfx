@@ -255,6 +255,8 @@ class Surface {
   std::shared_ptr<TextureProxy> getTextureProxy();
 
   void aboutToDraw(bool discardContent = false);
+
+  friend class Canvas;
 };
 
 }
