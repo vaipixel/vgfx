@@ -7,6 +7,7 @@
 #include "gpu/TextureSampler.h"
 #include "gpu/SamplerState.h"
 #include "UniformBuffer.h"
+#include "Blend.h"
 namespace vgfx {
 
 struct SamplerInfo {

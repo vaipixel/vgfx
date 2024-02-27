@@ -11,6 +11,7 @@
 #include "gpu/DrawArgs.h"
 #include "vgfx/core/TileMode.h"
 #include "vgfx/core/Shader.h"
+#include "gpu/Pipeline.h"
 
 namespace vgfx {
 
@@ -91,7 +92,7 @@ class FragmentProcessor : public Processor {
    */
   class CoordTransformIterator {
    public:
-    explicit CoordTransformIterator(const Pipline *pipline);
+    explicit CoordTransformIterator(const Pipeline *pipline);
 
     const CoordTransform *next();
    private:
