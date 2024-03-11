@@ -9,6 +9,7 @@
 #include "Texture.h"
 #include "ProgramInfo.h"
 #include "gpu/processors/FragmentProcessor.h"
+#include "gpu/processors/GeometryProcessor.h"
 namespace vgfx {
 
 struct DstTextureInfo {
@@ -82,7 +83,7 @@ class Pipeline : public ProgramInfo {
 
   std::string getMangledSuffix(const Processor *processor) const;
 
- private:std::unique_ptr<GeometryProcessoe> geometryProcessor = {};
+ private:std::unique_ptr<GeometryProcessor> geometryProcessor = {};
   std::vector<std::unique_ptr<FragmentProcessor>> fragmentProcessors = {};
   std::unordered_map<const Processor *, int> processorIndices = {};
   // This value is also the index in fragmentProcessors where coverage processors begin.

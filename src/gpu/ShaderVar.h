@@ -5,6 +5,7 @@
 #pragma once
 
 #include <string>
+#include "BitmaskOperators.h"
 #include "ShaderLanguageType.h"
 namespace vgfx {
 
@@ -12,7 +13,7 @@ enum class ShaderFlags : unsigned {
   None = 0,
   Vertex = 1 << 0,
   Fragment = 1 << 1,
-//  VGFX_MARK_AS_BITMASK_ENUM(Fragment)
+  VGFX_MARK_AS_BITMASK_ENUM(Fragment)
 };
 
 class ShaderVar {
