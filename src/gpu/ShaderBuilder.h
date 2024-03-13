@@ -21,6 +21,36 @@ enum class PrivateFeature : unsigned {
 
 class ShaderBuilder {
 
+ public:
+  explicit ShaderBuilder(ProgramBuilder *builder);
+
+  const Pipeline *getPipeline() const;
+
+  virtual ~ShaderBuilder() = default;
+
+  void setPrecisionQualifier(const std::string &precision);
+
+  /**
+   * Appends a 2D texture sample. The vec length and swizzle order of the result depends on the
+   * TextureSampler associated with the SamplerHandle.
+   */
+  void appendTextureLookup(SamplerHandle samplerHandle, const std::string &coordName);
+
+  /**
+   * Called by Processors to add code to one of the shaders.
+   */
+  void codeAppendf(const char format[], ...);
+
+  void codeAppend(const std::string &str);
+
+  void addFunction(const std::string &str);
+
+  /**
+   * Combines the various parts of the shader to create a single finalized shader string.
+   */
+  void finalize(ShaderFlags visibility);
+
+  std::string shaderString();
  protected:
   class Type {
    public:
@@ -58,5 +88,7 @@ class ShaderBuilder {
   int indentation = 0;
   bool atLineStart = false;
 };
+
+
 
 } // vgfx
