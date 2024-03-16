@@ -52,7 +52,7 @@ Surface::MakeFrom(vgfx::Context *context, vgfx::HardwareBufferRef hardwareBuffer
 std::shared_ptr<Surface> Surface::MakeFrom(std::shared_ptr<RenderTargetProxy> renderTargetProxy,
                                            const vgfx::SurfaceOptions *options) {
   if (renderTargetProxy == nullptr) {
-    logd("renderTargetProxy is nullptr");
+    LOGD("renderTargetProxy is nullptr");
     return nullptr;
   }
   return std::shared_ptr<Surface>(new Surface(std::move(renderTargetProxy), options));
@@ -64,10 +64,12 @@ Surface::Surface(std::shared_ptr<RenderTargetProxy> proxy, const vgfx::SurfaceOp
   if (options != nullptr) {
     surfaceOptions = *options;
   }
+  renderContext = new RenderContext(renderTargetProxy);
 }
 
 Surface::~Surface() {
   delete canvas;
+  delete renderContext;
 }
 
 Context *Surface::getContext() const {
@@ -93,6 +95,15 @@ std::shared_ptr<TextureProxy> Surface::getTextureProxy() {
   auto drawingManager = getContext()->drawingManager();
   drawingManager->addTextureResolveTask(renderTargetProxy);
   return renderTargetProxy->getTextureProxy();
+}
+
+BackendRenderTarget Surface::getBackendRenderTarget() {
+  flush();
+  auto renderTarget = renderTargetProxy->getRenderTarget();
+  if (renderTarget == nullptr) {
+    return {};
+  }
+  return renderTarget->getBackendRenderTarget();
 }
 
 }

@@ -75,6 +75,58 @@ class Canvas {
   void restore();
 
   /**
+   * Translates the current matrix by dx along the x-axis and dy along the y-axis. Mathematically,
+   * it replaces the current matrix with a translation matrix premultiplied with the current matrix.
+   * This has the effect of moving the drawing by (dx, dy) before transforming the result with the
+   * current matrix.
+   * @param dx
+   * @param dy
+   */
+  void translate(float dx, float dy);
+
+  /**
+   * Scales the current matrix by sx  along the x-axis and sy along the y-axis. Mathematically, it
+   *  replaces the current matrix with a scale matrix premultiplied with the current matrix. This has
+   *  the effect of scaling the drawing by (sx, sy) before transforming the result with the current
+   *  matrix.
+   * @param sx
+   * @param sy
+   */
+  void scale(float sx, float sy);
+
+  /**
+   * Rotates the current matrix by degrees. Positive values rotate the drawing clockwise.
+   * Mathematically, it replaces the current matrix with a rotation matrix premultiplied with the
+   * current matrix. This has the effect of rotating the drawing by degrees before transforming the
+   * result with the current matrix.
+   */
+  void rotate(float degrees);
+
+  /**
+   * Rotates the current matrix by degrees around the point (px, py). Positive values rotate the
+   * drawing clockwise. Mathematically, it replaces the current matrix with a rotation matrix
+   * premultiplied with the current matrix. This has the effect of rotating the drawing around the
+   * point (px, py) by degrees before transforming the result with the current matrix.
+   */
+  void rotate(float degrees, float px, float py);
+
+  /**
+   * Skews the current matrix by sx along the x-axis and sy along the y-axis. A positive value of sx
+   * skews the drawing right as y-axis values increase; a positive value of sy skews the drawing
+   * down as x-axis values increase. Mathematically, it replaces the current matrix with a skew
+   * matrix premultiplied with the current matrix. This has the effect of skewing the drawing by
+   * (sx, sy) before transforming the result with the current matrix.
+   */
+  void skew(float sx, float sy);
+
+  /**
+   * Replaces the current Matrix with matrix premultiplied with the existing one. This has the
+   * effect of transforming the drawn geometry by matrix, before transforming the result with the
+   * existing Matrix.
+   */
+  void concat(const Matrix &matrix);
+
+  /**
    * Returns the current total matrix.
    * @return
    */
@@ -93,12 +145,9 @@ class Canvas {
   void resetMatrix();
 
   /**
-   * Replaces the current Matrix with matrix premultiplied with the existing one. This has the
-   * effect of transforming the drawn geometry by matrix, before transforming the result with the
-   * existing Matrix.
-   * @param matrix
+   * Returns the current total clip Path.
    */
-  void concat(const Matrix &matrix);
+  Path getTotalClip() const;
 
   /**
    * Returns the current global alpha.
@@ -123,12 +172,6 @@ class Canvas {
    * @param blendMode
    */
   void setBlendMode(BlendMode blendMode);
-
-  /**
-   * Returns the current total clip.
-   * @return
-   */
-  Path getTotalClip() const;
 
   /**
    * Replaces clip with the intersection of clip and rect. The resulting clip is aliased; pixels are

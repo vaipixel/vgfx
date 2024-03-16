@@ -6,11 +6,12 @@
 
 #include "vgfx/gpu/Context.h"
 #include "gpu/ResourceKey.h"
+#include "gpu/ResourceHandle.h"
 
 namespace vgfx {
 
 /**
- * The base class for all proxy-derived objects. It delays the acquisition of resources until they
+ * The base class for all proxy-derived objects. It defers the acquisition of resources until they
  * are actually required.
  */
 class ResourceProxy {
@@ -19,25 +20,25 @@ class ResourceProxy {
 
   /**
    * Retrieves the context associated with this ResourceProxy.
-   * @return
    */
-  Context *getContext() const {
+  Context* getContext() const {
     return context;
   }
 
   /**
-   * Return the ResourceKey associated with this ResourceProxy.
-   * @return
+   * Returns the UniqueKey associated with this ResourceProxy.
    */
-  const ResourceKey &getResourceKey() const {
-    return resourceKey;
+  const UniqueKey& getUniqueKey() const {
+    return handle.key();
   }
+
  protected:
-  Context *context = nullptr;
-  ResourceKey resourceKey = {};
+  Context* context = nullptr;
+  ResourceHandle handle = {};
 
-  ResourceProxy() = default;
+  explicit ResourceProxy(UniqueKey uniqueKey) : handle(std::move(uniqueKey)) {
+  }
 
-  friend Context;
+  friend class ProxyProvider;
 };
 }

@@ -5,8 +5,7 @@
 #pragma once
 
 #include <mutex>
-#include "Context.h"
-#include <cstdint>
+#include <vgfx/core/Matrix.h>
 
 namespace vgfx {
 class Context;
@@ -56,6 +55,8 @@ class Device {
  private:
   uint32_t _uniqueID = 0;
   bool contextLocked = false;
+
+  friend class ResourceCache;
 };
 
 } // vgfx

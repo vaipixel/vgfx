@@ -15,11 +15,9 @@ message("VGFX_USE_GAMES_FRAME_PACING: ${VGFX_USE_GAMES_FRAME_PACING}")
 
 file(GLOB_RECURSE SRC_FILES
         src/core/*.*
-        src/platform/default/*.*
-        src/gpu/*.*
         src/opengl/*.*
         src/utils/*.*
-        src/*.*)
+        src/gpu/*.*)
 
 if (VGFX_USE_GAMES_FRAME_PACING)
     list(APPEND VGFX_INCLUDES third_party/swappy/include)

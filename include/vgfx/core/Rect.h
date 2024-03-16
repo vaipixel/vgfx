@@ -4,8 +4,9 @@
 
 #pragma once
 
-#include "Point.h"
-#include "Size.h"
+#include <algorithm>
+#include "vgfx/core/Point.h"
+#include "vgfx/core/Size.h"
 namespace vgfx {
 
 /**
@@ -473,6 +474,9 @@ struct RRect {
   Rect rect = Rect::MakeEmpty();
   Point radii = Point::Zero();
 
+  /**
+   * Scale the round rectangle by scaleX and scaleY.
+   */
   void scale(float scaleX, float scaleY);
 };
 }

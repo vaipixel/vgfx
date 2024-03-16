@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <cmath>
+
 namespace vgfx {
 /**
  * ISize holds two 32-bit integer dimensions.

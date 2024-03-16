@@ -8,10 +8,12 @@
 #include "vgfx/core/ColorType.h"
 #include "vgfx/core/Image.h"
 #include "gpu/proxies/TextureProxy.h"
-#include "gpu/Backend.h"
+#include "Backend.h"
 #include "vgfx/platform/HardwareBuffer.h"
 #include "vgfx/core/Color.h"
 #include "vgfx/core/ImageInfo.h"
+#include "gpu/ops/Op.h"
+#include "gpu/RenderContext.h"
 
 namespace vgfx {
 class Canvas;
@@ -245,6 +247,7 @@ class Surface {
   std::shared_ptr<RenderTargetProxy> renderTargetProxy = nullptr;
   SurfaceOptions surfaceOptions = {};
   Canvas *canvas = nullptr;
+  RenderContext *renderContext = nullptr;
   std::shared_ptr<Image> cacheImage = nullptr;
 
   static std::shared_ptr<Surface> MakeFrom(std::shared_ptr<RenderTargetProxy> renderTargetProxy,
@@ -256,6 +259,11 @@ class Surface {
 
   void aboutToDraw(bool discardContent = false);
 
+  void replaceRenderTargetProxy(std::shared_ptr<RenderTargetProxy> newProxy);
+
+  void addOp(std::unique_ptr<Op> op);
+
+  friend class DrawingManager;
   friend class Canvas;
 };
 

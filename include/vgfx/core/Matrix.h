@@ -5,8 +5,7 @@
 #pragma once
 
 #include <cstring>
-#include "Point.h"
-#include "Rect.h"
+#include "vgfx/core/Rect.h"
 
 namespace vgfx {
 

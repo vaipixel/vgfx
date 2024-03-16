@@ -8,7 +8,7 @@
 #include "ShaderVar.h"
 #include "gpu/processors/FragmentProcessor.h"
 #include "SamplerHandle.h"
-#include "FragmentShaderBuilder.h"
+#include "gpu/FragmentShaderBuilder.h"
 #include "VertexShaderBuilder.h"
 #include "VaryingHandler.h"
 #include "UniformHandler.h"
@@ -90,7 +90,8 @@ class ProgramBuilder {
 
   void emitFSOutputSwizzle();
 
-
+  friend class FragmentShaderBuilder;
+  friend class ProcessorGuard;
 };
 
 } // vgfx

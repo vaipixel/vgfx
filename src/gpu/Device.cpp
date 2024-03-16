@@ -5,10 +5,11 @@
 #include "vgfx/gpu/Device.h"
 #include "utils/UniqueID.h"
 #include "utils/Logger.h"
+#include "vgfx/gpu/Context.h"
+
 
 namespace vgfx {
 Device::Device() : _uniqueID(UniqueID::Next()) {
-
 }
 
 Device::~Device() {
@@ -36,7 +37,7 @@ void Device::unlock() {
 void Device::releaseAll() {
   std::lock_guard<std::mutex> autoLock(locker);
   if (context == nullptr) {
-    logd("Context is nullptr");
+    LOGD("Context is nullptr");
     return;
   }
   contextLocked = onLockContext();

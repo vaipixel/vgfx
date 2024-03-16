@@ -7,6 +7,7 @@
 
 namespace vgfx {
 
+#define LOGD(...) ::vgfx::PrintLog(__VA_ARGS__)
 #define LOGI(...) ::vgfx::PrintLog(__VA_ARGS__)
 #define LOGW(...) ::vgfx::PrintWarn(__VA_ARGS__)
 #define LOGE(...) ::vgfx::PrintError(__VA_ARGS__)

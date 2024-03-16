@@ -6,6 +6,7 @@
 
 #include "ShaderBuilder.h"
 namespace vgfx {
+class FragmentProcessor;
 
 class FragmentShaderBuilder : public ShaderBuilder {
  public:
@@ -28,6 +29,7 @@ class FragmentShaderBuilder : public ShaderBuilder {
 
   void onFinalize() override;
 
+  friend class ProgramBuilder;
 };
 
 } // vgfx

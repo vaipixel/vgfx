@@ -11,12 +11,16 @@
 #include "gpu/ResourceProvider.h"
 #include "gpu/ProxyProvider.h"
 #include "gpu/Gpu.h"
-#include "vgfx/core/Caps.h"
+#include "Caps.h"
 #include <cstddef>
 
 namespace vgfx {
+class ProgramCache;
+class ResourceCache;
 class DrawingManager;
-class Device;
+class Gpu;
+class ResourceProvider;
+class ProxyProvider;
 
 class Context {
  public:
@@ -172,6 +176,8 @@ class Context {
   void releaseAll(bool releaseGPU);
 
   friend class Device;
+
+  friend class Resource;
 };
 
 } // vgfx
