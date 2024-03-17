@@ -5,7 +5,8 @@
 #pragma once
 
 #include "ResourceProxy.h"
-#include "vgfx/gpu/ImageOrigin.h"
+#include "gpu/Texture.h"
+#include "gpu/TextureSampler.h"
 
 namespace vgfx {
 

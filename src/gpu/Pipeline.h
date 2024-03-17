@@ -4,12 +4,14 @@
 
 #pragma once
 
-#include <memory>
-#include "vgfx/core/Point.h"
-#include "Texture.h"
-#include "ProgramInfo.h"
+#include <unordered_map>
+#include "Swizzle.h"
+#include "gpu/Blend.h"
+#include "gpu/ProgramInfo.h"
+#include "gpu/processors/EmptyXferProcessor.h"
 #include "gpu/processors/FragmentProcessor.h"
 #include "gpu/processors/GeometryProcessor.h"
+
 namespace vgfx {
 
 struct DstTextureInfo {

@@ -4,13 +4,9 @@
 
 #pragma once
 
-#include <memory>
+#include "ResourceProxy.h"
 #include "TextureProxy.h"
 #include "gpu/RenderTarget.h"
-#include "ResourceProxy.h"
-#include "vgfx/platform/HardwareBuffer.h"
-#include "vgfx/gpu/PixelFormat.h"
-#include "gpu/Texture.h"
 
 namespace vgfx {
 
@@ -69,9 +65,9 @@ class RenderTargetProxy : public ResourceProxy {
    * @param origin
    * @return
    */
-  static std::shared_ptr<RenderTargetProxy> Make(Context *const, int width, int height,
-                                                 PixelFormat format, int sampleCount = 1,
-                                                 bool mipMapped = false,
+  static std::shared_ptr<RenderTargetProxy> Make(Context *context, int width, int height,
+                                                 PixelFormat format = PixelFormat::RGBA_8888,
+                                                 int sampleCount = 1, bool mipMapped = false,
                                                  ImageOrigin origin = ImageOrigin::TopLeft);
 
   /**
@@ -157,7 +153,8 @@ class RenderTargetProxy : public ResourceProxy {
   std::shared_ptr<RenderTargetProxy> makeRenderTargetProxy() const;
 
  protected:
-  RenderTargetProxy(int width, int height, PixelFormat format, int sampleCount, ImageOrigin origin);
+  RenderTargetProxy(UniqueKey uniqueKey, int width, int height, PixelFormat format, int sampleCount,
+                    ImageOrigin origin);
 
  private:
   int _width = 0;

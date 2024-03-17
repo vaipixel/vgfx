@@ -4,17 +4,24 @@
 
 #pragma once
 
-#include "vgfx/gpu/Context.h"
-#include "gpu/TextureSampler.h"
-#include "gpu/RenderPass.h"
+#include <memory>
 #include "gpu/Semaphore.h"
+#include "gpu/TextureSampler.h"
+#include "vgfx/gpu/Context.h"
+
 namespace vgfx {
+
+class RenderPass;
+
+class RenderTarget;
+
+class Texture;
 
 class Gpu {
  public:
   virtual ~Gpu() = default;
 
-  Context* getContext() {
+  Context *getContext() {
     return context;
   }
 
@@ -41,9 +48,9 @@ class Gpu {
   void regenerateMipmapLevels(const TextureSampler *sampler);
 
  protected:
-  Context* context;
+  Context *context;
 
-  explicit Gpu(Context* context) : context(context) {
+  explicit Gpu(Context *context) : context(context) {
   }
 
   virtual void onRegenerateMipmapLevels(const TextureSampler *sampler) = 0;

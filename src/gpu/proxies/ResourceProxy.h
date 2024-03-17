@@ -4,8 +4,7 @@
 
 #pragma once
 
-#include "vgfx/gpu/Context.h"
-#include "gpu/ResourceKey.h"
+#include "gpu/Resource.h"
 #include "gpu/ResourceHandle.h"
 
 namespace vgfx {

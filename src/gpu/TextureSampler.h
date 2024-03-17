@@ -5,6 +5,9 @@
 #pragma once
 
 #include "vgfx/gpu/Context.h"
+#include "vgfx/gpu/PixelFormat.h"
+#include "vgfx/utils/BytesKey.h"
+
 namespace vgfx {
 enum class TextureType { Unknown, TwoD, Rectangle, External };
 

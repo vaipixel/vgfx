@@ -3,8 +3,12 @@
 //
 
 #include "vgfx/gpu/Surface.h"
+#include "DrawingManager.h"
+#include "core/PixelBuffer.h"
+#include "gpu/ProxyProvider.h"
+#include "gpu/RenderContext.h"
+#include "images/TextureImage.h"
 #include "utils/PixelFormatUtil.h"
-#include "gpu/proxies/RenderTargetProxy.h"
 #include "utils/Logger.h"
 
 namespace vgfx {
@@ -28,16 +32,16 @@ std::shared_ptr<Surface> Surface::Make(vgfx::Context *context, int width, int he
 }
 
 std::shared_ptr<Surface> Surface::MakeFrom(vgfx::Context *context,
-                                           const vgfx::BackendRenderTarget &renderTarget,
-                                           vgfx::ImageOrigin origin, const vgfx::SurfaceOptions *options) {
+                                           const BackendRenderTarget &renderTarget,
+                                           ImageOrigin origin, const SurfaceOptions *options) {
   auto proxy = RenderTargetProxy::MakeFrom(context, renderTarget, origin);
   return MakeFrom(std::move(proxy), options);
 }
 
 std::shared_ptr<Surface> Surface::MakeFrom(vgfx::Context *context,
                                            const vgfx::BackendTexture &backendTexture,
-                                           vgfx::ImageOrigin origin,
-                                           int sampleCount, const vgfx::SurfaceOptions *options) {
+                                           ImageOrigin origin, int sampleCount,
+                                           const SurfaceOptions *options) {
   auto proxy = RenderTargetProxy::MakeFrom(context, backendTexture, sampleCount, origin);
   return MakeFrom(std::move(proxy), options);
 }

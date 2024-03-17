@@ -4,15 +4,11 @@
 
 #pragma once
 
-#include "Device.h"
-#include "gpu/ProgramCache.h"
-#include "gpu/ResourceCache.h"
-#include "gpu/DrawingManager.h"
-#include "gpu/ResourceProvider.h"
-#include "gpu/ProxyProvider.h"
-#include "gpu/Gpu.h"
-#include "Caps.h"
-#include <cstddef>
+#include <chrono>
+#include "vgfx/core/Color.h"
+#include "vgfx/gpu/Backend.h"
+#include "vgfx/gpu/Caps.h"
+#include "vgfx/gpu/Device.h"
 
 namespace vgfx {
 class ProgramCache;
